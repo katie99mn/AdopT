@@ -1,0 +1,10 @@
+.navbar-item {
+  height: 64px; /* Keep the navbar height consistent with Bulma defaults */
+  padding: 0; /* Remove padding to maximize image size */
+}
+
+.navbar-item img {
+  max-height: 100%; /* Ensure the image scales without exceeding the navbar height */
+  object-fit: contain; /* Make sure the image doesn't get distorted */
+  width: auto; /* Adjust the width automatically to maintain aspect ratio */
+}
