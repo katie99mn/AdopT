@@ -8,3 +8,14 @@
   object-fit: contain; /* Make sure the image doesn't get distorted */
   width: auto; /* Adjust the width automatically to maintain aspect ratio */
 }
+
+.about-us {
+  background-color: #e1d2b8;
+  width: 100%;
+  height: 400px;
+  text-align: center;
+}
+
+.circle-logo {
+  height: 350px;
+}
