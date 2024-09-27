@@ -37,3 +37,8 @@
 body {
   font-family: "Tinos", serif;
 }
+
+/* custom font color (dark brown) */
+.darkbrown {
+  color: #5c4c44;
+}
