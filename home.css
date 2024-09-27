@@ -16,6 +16,19 @@
   text-align: center;
 }
 
+.about-us-header {
+  font-size: xx-large;
+}
+.about-us-body {
+  font-size: large;
+  padding-left: 25%;
+  padding-right: 25%;
+}
+
+.about-us-button {
+  padding-top: 1%;
+}
+
 .circle-logo {
   height: 300px;
 }
