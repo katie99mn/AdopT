@@ -33,6 +33,10 @@ body {
   font-family: "Faustina";
 }
 
+.bg {
+  background-color: #e1d2b8;
+}
+
 /* custom font color (dark brown) */
 .darkbrown {
   color: #5c4c44;
