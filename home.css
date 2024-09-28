@@ -102,26 +102,28 @@ body {
   padding: 10px 0;
 }
 
-/* FOOTER */
+/* FOOTER STYLING */
 /* footer icons small */
 .small_icon {
-  width: 28px;
-  margin: 0 8px;
+  width: 24px;
+  margin-right: 8px;
 }
-/* vertically align the contact info */
+footer a {
+  color: #5c4c44;
+  font-size: 14px;
+}
 footer p {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: nowrap;
-}
-footer a {
   color: #5c4c44;
 }
-/* .footer-content {
+footer .columns {
+  max-width: 600px;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+footer .column {
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-} */
+}
