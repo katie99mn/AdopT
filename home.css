@@ -46,3 +46,19 @@ body {
   box-shadow: 0px 4px 8px rgba(92, 76, 68, 0.4);
   outline: none;
 }
+
+/* FOOTER */
+/* footer icons small */
+.small_icon {
+  width: 28px;
+  margin: 0 8px;
+}
+/* vertically align the contact info */
+footer p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+footer a {
+  color: #5c4c44;
+}
