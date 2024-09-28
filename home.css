@@ -127,3 +127,10 @@ footer .column {
   display: flex;
   justify-content: center;
 }
+
+.embed-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Full width */
+}
