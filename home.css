@@ -19,13 +19,13 @@
   font-size: xx-large;
 }
 .about-us-body {
-  font-size: large;
-  padding-left: 25%;
-  padding-right: 25%;
+  font-size: 22px;
+  max-width: 720;
+  margin: 0 auto;
 }
 
 .circle-logo {
-  height: 280px;
+  width: 300px;
 }
 
 /* custom google font class */
