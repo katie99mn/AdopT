@@ -1,47 +1,38 @@
+/* FONT & COLOR STYLING */
+/* custom google font class */
+body {
+  font-family: "Faustina";
+}
+/* custom font color (light brown) */
+.bg {
+  background-color: #e1d2b8;
+}
+/* custom font color (dark brown) */
+.darkbrown {
+  color: #5c4c44;
+}
+/* adjust navbar height and remove padding*/
 .navbar-item {
-  height: 64px; /* Keep the navbar height consistent with Bulma defaults */
-  padding: 0; /* Remove padding to maximize image size */
+  height: 68px;
+  padding: 0;
 }
 
-.navbar-item img {
-  max-height: 100%; /* Ensure the image scales without exceeding the navbar height */
-  object-fit: contain; /* Make sure the image doesn't get distorted */
-  width: auto; /* Adjust the width automatically to maintain aspect ratio */
+/* HOME PAGE ~ ABOUT US SECTION (upper half) */
+/* circle logo sizing */
+.circle-logo {
+  width: 300px;
 }
-
+/* about us text section */
 .about-us {
   background-color: #e1d2b8;
   width: 100%;
   text-align: center;
-}
-
-.about-us-header {
-  font-size: xx-large;
 }
 .about-us-body {
   font-size: 22px;
   max-width: 720;
   margin: 0 auto;
 }
-
-.circle-logo {
-  width: 300px;
-}
-
-/* custom google font class */
-body {
-  font-family: "Faustina";
-}
-
-.bg {
-  background-color: #e1d2b8;
-}
-
-/* custom font color (dark brown) */
-.darkbrown {
-  color: #5c4c44;
-}
-
 /* learn more button */
 .learn_btn {
   background-color: #5c4c44;
