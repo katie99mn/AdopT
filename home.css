@@ -134,3 +134,16 @@ footer .column {
   align-items: center;
   width: 100%; /* Full width */
 }
+
+/* CONTACT PAGE */
+.contact-info {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.contact-info section {
+  font-size: larger;
+}
+
+.subscribe {
+  background-color: #e1d2b8;
+}
