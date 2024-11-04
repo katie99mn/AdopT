@@ -7,9 +7,15 @@ body {
 .bg {
   background-color: #e1d2b8;
 }
+.dbg {
+  background-color: #5c4c44;
+}
 /* custom font color (dark brown) */
 .darkbrown {
   color: #5c4c44;
+}
+.lightbrown {
+  color: #e1d2b8;
 }
 /* adjust navbar height and remove padding*/
 .navbar-item {
@@ -50,6 +56,10 @@ body {
   width: 450px;
   height: auto;
   text-align: center;
+}
+.eboard_image {
+  width: 400px;
+  height: auto;
 }
 /* Calendar */
 .calendar {
@@ -146,4 +156,10 @@ footer .column {
 
 .subscribe {
   background-color: #e1d2b8;
+}
+
+/* ABOUT US PAGE */
+/* PROFILES */
+.about-hyperlink:hover {
+  color: white;
 }
