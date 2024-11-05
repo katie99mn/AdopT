@@ -89,6 +89,19 @@ body {
   font-size: 12px;
 }
 
+.event1-bg {
+  background-color: #fef9f3;
+}
+.event2-bg {
+  background-color: #f5f7ec;
+}
+.event3-bg {
+  background-color: #c2997d;
+}
+.event4-bg {
+  background-color: #cae1b7;
+}
+
 .day:hover .event {
   display: block;
 }
