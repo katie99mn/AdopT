@@ -57,10 +57,7 @@ body {
   height: auto;
   text-align: center;
 }
-.eboard_image {
-  width: 400px;
-  height: auto;
-}
+
 /* Calendar */
 .calendar {
   display: grid;
@@ -162,4 +159,28 @@ footer .column {
 /* PROFILES */
 .about-hyperlink:hover {
   color: white;
+}
+.about-tile-img {
+  width: 350px; /* Set the desired square size */
+  height: 350px;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+}
+
+.about-tile-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.eboard_image {
+  width: 400px;
+  height: auto;
+}
+.shadow {
+  box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.2); /* Adjust as needed */
+}
+.imgshadow {
+  box-shadow: 8px 0 6px -6px rgba(0, 0, 0, 0.2); /* Adjust as needed */
 }
