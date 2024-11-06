@@ -78,12 +78,73 @@
             Instagram @adopt_uw!
           </p>
         </div>
+
         <div class="pb-6">
+          <!--event calendar-->
           <a href="about.html">
-            <button class="button learn_btn mt-4 is-size-5">
+            <button class="button learn_btn mt-4 mr-1 is-size-5">
               Event Calendar
             </button></a
           >
+          <!--add event -->
+          <button id="add_btn" class="button learn_btn mt-4 ml-1 is-size-5">
+            Add Event
+          </button>
+          <!-- add event module -->
+          <div class="modal has-text-left" id="add-mod">
+            <div class="modal-background" id="add-bg"></div>
+            <div class="modal-content has-background-light p-4">
+              <h1 class="title is-2 darkbrown">Add Event</h1>
+              <form id="event-form" class="darkbrown">
+                <p>
+                  Event Name:
+                  <input type="text" class="input mt-2 mb-3" id="event_name" />
+                </p>
+
+                <p>
+                  Location:
+                  <input
+                    type="text"
+                    class="input mt-2 mb-3"
+                    id="event_location"
+                  />
+                </p>
+
+                <p>
+                  Time:
+                  <input type="text" class="input mt-2 mb-3" id="event_time" />
+                </p>
+                <p>
+                  Type:
+                  <input type="text" class="input mt-2 mb-3" id="event_type" />
+                </p>
+                <p>
+                  Description:
+                  <input
+                    type="text"
+                    class="input mt-2 mb-3 textera is-large"
+                    id="event_type"
+                  />
+                </p>
+                <p>
+                  Image File:
+                  <input
+                    id="image-upload"
+                    class="input mt-2 darkbrown"
+                    type="file"
+                    accept="image/*"
+                  />
+                </p>
+
+                <p id="messages2" class="is-hidden">
+                  errors will show here .. make this hidden
+                </p>
+                <!-- submit -->
+                <br />
+                <button class="button learn_btn">Submit</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -206,5 +267,43 @@
         </div>
       </div>
     </footer>
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+
+    <script>
+      // TODO
+      // Copy **only** your firebaseConfig from Google Firebae and add it below
+
+      // Your web app's Firebase configuration
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyA3AlvLXcK21thAwxcg8SNlTneWOdlLd-U",
+        authDomain: "adopt-80f60.firebaseapp.com",
+        projectId: "adopt-80f60",
+        storageBucket: "adopt-80f60.firebasestorage.app",
+        messagingSenderId: "996048362985",
+        appId: "1:996048362985:web:e2784404c5a034e112bf78",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      // define authentication variable
+      let auth = firebase.auth();
+      let db = firebase.firestore();
+
+      // define a storage reference
+      let ref = firebase.storage().ref();
+    </script>
+
+    <script src="app.js"></script>
   </body>
 </html>

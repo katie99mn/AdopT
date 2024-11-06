@@ -3,6 +3,14 @@
 body {
   font-family: "Faustina";
 }
+/* set fond for buttons */
+button,
+.button {
+  font-family: "Faustina";
+}
+.custom_font {
+  font-family: "Faustina";
+}
 /* custom font color (light brown) */
 .bg {
   background-color: #e1d2b8;
