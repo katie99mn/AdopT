@@ -25,12 +25,12 @@
     <div class="navbar">
       <div class="navbar-brand">
         <!-- logo -->
-        <a href="" style="width: 200px">
+        <a href="./home.html" style="width: 200px">
           <img src="indeximages/Header_logo.jpg" />
         </a>
 
         <!-- burger icon -->
-        <div class="navbar-burger">
+        <div id="burger" class="navbar-burger" style="height: 74px">
           <span></span>
           <span></span>
           <span></span>
@@ -38,43 +38,38 @@
       </div>
 
       <!-- navigation -->
-
-      <div class="navbar-menu p-1">
+      <div id="nav-links" class="navbar-menu p-1">
         <div class="navbar-end">
-          <a
-            href="home.html"
-            class="navbar-item has-text-weight-bold p-5 darkbrown"
-            >Home</a
-          >
-          <a
-            href="about.html"
-            class="navbar-item has-text-weight-bold p-5 darkbrown"
-            >About</a
-          >
-          <a
-            href="events.html"
-            class="navbar-item has-text-weight-bold p-5 darkbrown"
-            >Events</a
-          >
-          <a
-            href="contact.html"
-            class="navbar-item has-text-weight-bold p-5 darkbrown"
-            >Contact</a
-          >
+          <div class="navbar-item">
+            <a href="home.html" class="has-text-weight-bold darkbrown">Home</a>
+          </div>
+          <div class="navbar-item">
+            <a href="about.html" class="has-text-weight-bold darkbrown"
+              >About</a
+            >
+          </div>
+          <div class="navbar-item">
+            <a href="events.html" class="has-text-weight-bold darkbrown"
+              >Events</a
+            >
+          </div>
+          <div class="navbar-item">
+            <a href="contact.html" class="has-text-weight-bold darkbrown"
+              >Contact</a
+            >
+          </div>
         </div>
       </div>
     </div>
+
     <!-- full mission statement -->
     <div class="about-us">
-      <div class="pt-2">
-        <div href="" class="about-us-header bg">
-          <b class="darkbrown is-size-2">Our Mission</b>
-        </div>
+      <div class="dbg pt-2">
         <div
-          href=""
-          class="darkbrown is-size-5 pt-6"
+          class="lightbrown is-size-5"
           style="max-width: 1000px; margin: 0 auto"
         >
+          <h1 class="is-size-1 is-title is-bold">Our Mission</h1>
           <p class="ml-2 mr-2">
             "The mission of the Transracial Adoptees at UW - Madison is to
             create a safe and welcoming environment for adoptees and those
@@ -95,113 +90,195 @@
           </p>
         </div>
       </div>
-      <div href="" class="about-us-header bg mt-5">
-        <b class="darkbrown is-size-2">Leadership Team</b>
+      <div class="about-us-header bg mb-2">
+        <p class="pt-3"><b class="darkbrown is-size-2">Leadership Team</b></p>
       </div>
-      <div class="columns pt-6 ml-2 mr-2">
-        <div class="column">
-          <a href="about_grace.html"
-            ><img
-              src="indeximages/Mission_image.png"
-              class="smaller_image"
-              alt="group photo"
-          /></a>
-          <p class="pt-4">
-            Grace Drayton <br />
-            Internal President <br />
-            Contact me at:
-            <a href="mailto: gadrayton@wisc.edu">gadrayton@wisc.edu</a> <br />
-            Connect with me on
-            <a href="https://www.linkedin.com/in/gracedrayton">LinkedIn</a>
-          </p>
-        </div>
-        <div class="column">
-          <a href="about_lacey.html"
-            ><img
-              src="indeximages/Mission_image.png"
-              class="smaller_image"
-              alt="group photo"
-          /></a>
-          <p class="pt-4">
-            Lacey Coyne <br />
-            External President <br />
-            Contact me at:
-            <a href="mailto: "></a> <br />
-            Connect with me on <a href="">LinkedIn</a>
-          </p>
-        </div>
-        <div class="column">
-          <a href="about_david.html"
-            ><img
-              src="indeximages/Mission_image.png"
-              class="smaller_image"
-              alt="group photo"
-          /></a>
-          <p class="pt-4">
-            David Izzo <br />
-            Director of Finance <br />
-            Contact me at:
-            <a href="mailto: "></a> <br />
-            Connect with me on <a href="">LinkedIn</a>
-          </p>
-        </div>
-      </div>
-      <div class="columns pt-6 ml-2 mr-2">
-        <div class="column">
-          <a href="about_ruby.html"
-            ><img
-              src="indeximages/Mission_image.png"
-              class="smaller_image"
-              alt="group photo"
-          /></a>
-          <p class="pt-4">
-            Ruby Slavin <br />
-            <!-- She/her <br /> -->
-            Director of Marketing <br />
-            Contact me at:
-            <a href="mailto: rslavin@wisc.edu">rslavin@wisc.edu</a> <br />
-            Connect with me on
-            <a href="https://linkedin.com/in/ruby-slavin-3597a5204">LinkedIn</a>
-          </p>
+
+      <div class="bg">
+        <!-- ROW #1 -->
+        <div class="columns pt-5 ml-2 mr-2">
+          <!-- GRACE DRAYTON -->
+          <div class="column">
+            <div
+              style="max-width: 350px; margin: 0 auto"
+              class="about-tile shadow"
+            >
+              <div class="about-tile-img">
+                <a href="about_grace.html"
+                  ><img src="indeximages/grace_drayton.jpg"
+                /></a>
+              </div>
+              <div style="max-width: 350px; margin: 0 auto">
+                <p class="p-2 darkbrown" style="background-color: white">
+                  <b class="is-size-5">Grace Drayton | Internal President</b
+                  ><br />
+                  Contact me at:
+                  <a
+                    class="about-us-hyperlink"
+                    href="mailto: gadrayton@wisc.edu"
+                    >gadrayton@wisc.edu</a
+                  >
+                  <br />
+                  Connect with me:
+                  <a
+                    class="about-us-hyperlink"
+                    href="https://www.linkedin.com/in/gracedrayton"
+                    >LinkedIn</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- LACEY COYNE -->
+          <div class="column">
+            <div
+              style="max-width: 350px; margin: 0 auto"
+              class="about-tile shadow"
+            >
+              <div class="about-tile-img">
+                <a href="about_lacey.html"
+                  ><img src="indeximages/lacey_coyne.jpg"
+                /></a>
+              </div>
+              <div style="max-width: 350px; margin: 0 auto">
+                <p class="p-2 darkbrown" style="background-color: white">
+                  <b class="is-size-5">Lacey Coyne | External President</b
+                  ><br />
+                  Contact me at:
+                  <a class="about-us-hyperlink" href="mailto: lmcoyne@wisc.edu"
+                    >lmcoyne@wisc.edu</a
+                  >
+                  <br />
+                  Connect with me:
+                  <a
+                    class="about-us-hyperlink"
+                    href="http://www.linkedin.com/in/lacey-coyne"
+                    >LinkedIn</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- DAVID IZZO -->
+          <div class="column">
+            <div
+              style="max-width: 350px; margin: 0 auto"
+              class="about-tile shadow"
+            >
+              <div class="about-tile-img">
+                <a href="about_david.html"
+                  ><img src="indeximages/david-izzo.jpg"
+                /></a>
+              </div>
+              <div style="max-width: 350px; margin: 0 auto">
+                <p class="p-2 darkbrown" style="background-color: white">
+                  <b class="is-size-5">David Izzo | Director of Finance</b
+                  ><br />
+                  Contact me at:
+                  <a class="about-us-hyperlink" href="mailto: dsizzo@wisc.edu"
+                    >dsizzo@wisc.edu</a
+                  >
+                  <br />
+                  Connect with me:
+                  <a
+                    class="about-us-hyperlink"
+                    href="https://www.linkedin.com/in/david-izzo-1291a4293/"
+                    >LinkedIn</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="column">
-          <a href="about_shu_lan.html"
-            ><img
-              src="indeximages/Mission_image.png"
-              class="smaller_image"
-              alt="group photo"
-          /></a>
-          <p class="pt-4">
-            Shu Lan Schaut <br />
-            <!-- She/her/hers <br /> -->
-            Director of Communications <br />
-            Contact me at:
-            <a href="mailto: seschaut@wisc.edu ">seschaut@wisc.edu </a> <br />
-            Connect with me on
-            <a href="https://www.linkedin.com/in/shu-lan-schaut/">LinkedIn</a>
-          </p>
-        </div>
-        <div class="column">
-          <a href="about_abbi.html"
-            ><img
-              src="indeximages/Mission_image.png"
-              class="smaller_image"
-              alt="group photo"
-          /></a>
-          <p class="pt-4">
-            Abbi Stickels <br />
-            Adviser <br />
-            Contact me at:
-            <a href="mailto: "></a> <br />
-            Connect with me on <a href="">LinkedIn</a>
-          </p>
+        <!-- ROW #2 -->
+        <div class="columns pt-5 pb-4 ml-2 mr-2">
+          <!-- RUBY SLAVIN -->
+          <div class="column">
+            <div
+              style="max-width: 350px; margin: 0 auto"
+              class="about-tile shadow"
+            >
+              <div class="about-tile-img">
+                <a href="about_ruby.html"
+                  ><img src="indeximages/ruby_slavin.jpg"
+                /></a>
+              </div>
+              <div style="max-width: 350px; margin: 0 auto">
+                <p class="p-2 darkbrown" style="background-color: white">
+                  <b class="is-size-5">Ruby Slavin | Director of Marketing</b
+                  ><br />
+                  Contact me at:
+                  <a class="about-us-hyperlink" href="mailto: rslavin@wisc.edu"
+                    >rslavin@wisc.edu</a
+                  >
+                  <br />
+                  Connect with me:
+                  <a
+                    class="about-us-hyperlink"
+                    href="https://linkedin.com/in/ruby-slavin-3597a5204"
+                    >LinkedIn</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- SHU LAN SCHAUT -->
+          <div class="column">
+            <div
+              style="max-width: 350px; margin: 0 auto"
+              class="about-tile shadow"
+            >
+              <div class="about-tile-img">
+                <a href="about_shu_lan.html"
+                  ><img src="indeximages/shulan_schaut.jpg"
+                /></a>
+              </div>
+              <div style="max-width: 350px; margin: 0 auto">
+                <p class="p-2 darkbrown" style="background-color: white">
+                  <b class="is-size-5"
+                    >Shu Lan Schaut | Director of Communications</b
+                  ><br />
+                  Contact me at:
+                  <a class="about-us-hyperlink" href="mailto: seschaut@wisc.edu"
+                    >seschaut@wisc.edu</a
+                  >
+                  <br />
+                  Connect with me:
+                  <a
+                    class="about-us-hyperlink"
+                    href="https://www.linkedin.com/in/shu-lan-schaut/"
+                    >LinkedIn</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ABBI STICKELS -->
+          <div class="column">
+            <div
+              style="max-width: 350px; margin: 0 auto"
+              class="shadow about-tile"
+            >
+              <div class="about-tile-img">
+                <a href="about_abbi.html"
+                  ><img src="indeximages/abbi_stickels.jpg"
+                /></a>
+              </div>
+              <div style="max-width: 350px; margin: 0 auto">
+                <p class="p-2 darkbrown" style="background-color: white">
+                  <b class="is-size-5">Abbi Stickels | Advisor</b><br />
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <!--footer-->
-    <footer class="bg footer mt-6 pb-5 pt-3">
+    <footer class="bg footer pb-5 pt-3">
       <div class="content columns is-vcentered is-multiline">
         <div class="column p-1 is-narrow">
           <p>
@@ -230,5 +307,6 @@
         </div>
       </div>
     </footer>
+    <script src="app.js"></script>
   </body>
 </html>

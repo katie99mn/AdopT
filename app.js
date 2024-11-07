@@ -1,6 +1,15 @@
+// FUNCTIONS
 function r_e(id) {
   return document.querySelector(`#${id}`);
 }
+
+// NAVBAR
+// mobile burger
+r_e("burger").addEventListener("click", () => {
+  r_e("nav-links").classList.toggle("is-active");
+});
+
+// USER AUTHENTIFICATION
 
 //add event js
 let add_btn = r_e("add_btn");

@@ -22,15 +22,16 @@
   </head>
   <body>
     <!-- navbar -->
+    <!-- navbar -->
     <div class="navbar">
       <div class="navbar-brand">
         <!-- logo -->
-        <a href="" style="width: 200px">
+        <a href="./home.html" style="width: 200px">
           <img src="indeximages/Header_logo.jpg" />
         </a>
 
         <!-- burger icon -->
-        <div class="navbar-burger">
+        <div id="burger" class="navbar-burger" style="height: 74px">
           <span></span>
           <span></span>
           <span></span>
@@ -38,64 +39,72 @@
       </div>
 
       <!-- navigation -->
-
-      <div class="navbar-menu p-1">
+      <div id="nav-links" class="navbar-menu p-1">
         <div class="navbar-end">
-          <a
-            href="home.html"
-            class="navbar-item has-text-weight-bold p-5 darkbrown"
-            >Home</a
-          >
-          <a
-            href="about.html"
-            class="navbar-item has-text-weight-bold p-5 darkbrown"
-            >About</a
-          >
-          <a
-            href="events.html"
-            class="navbar-item has-text-weight-bold p-5 darkbrown"
-            >Events</a
-          >
-          <a
-            href="contact.html"
-            class="navbar-item has-text-weight-bold p-5 darkbrown"
-            >Contact</a
-          >
+          <div class="navbar-item">
+            <a href="home.html" class="has-text-weight-bold darkbrown">Home</a>
+          </div>
+          <div class="navbar-item">
+            <a href="about.html" class="has-text-weight-bold darkbrown"
+              >About</a
+            >
+          </div>
+          <div class="navbar-item">
+            <a href="events.html" class="has-text-weight-bold darkbrown"
+              >Events</a
+            >
+          </div>
+          <div class="navbar-item">
+            <a href="contact.html" class="has-text-weight-bold darkbrown"
+              >Contact</a
+            >
+          </div>
         </div>
       </div>
     </div>
-    <!-- about section -->
-    <div href="" class="about-us bg">
+
+    <!-- EBOARD MEMBER INFO -->
+    <div class="about-us bg">
       <b class="darkbrown is-size-2">Abbi Stickels</b>
     </div>
-    <div class="section">
-      <div class="columns mt-2">
-        <div class="column is-6 ml-6 mr-2">
-          <p></p>
-          <br />
-          <p>
-            Abbi Stickels <br />
-            Adviser <br />
-            Contact me at:
-            <a href="mailto: "></a> <br />
-            Connect with me on <a href="">LinkedIn</a>
-
-            <br />
-          </p>
-        </div>
-
-        <div class="column is-6 ml-6 mr-2">
+    <div class="section pt-5 pb-5">
+      <div class="columns" style="max-width: 1200px; margin: 0 auto">
+        <!-- eboard member headshot -->
+        <div class="column has-text-centered">
           <img
-            src="indeximages/Mission_image.png"
-            class="smaller_image"
-            alt="group photo"
+            src="indeximages/abbi_stickels.jpg"
+            class="eboard_image shadow"
+            alt="Abbi Stickels"
           />
+        </div>
+        <!-- eboard member bio -->
+        <div class="column">
+          <p>
+            Abbi Stickels (she/her/they/them) is an alumna of the University of
+            Wisconsin-Madison, where she earned her Bachelor of Fine Arts in
+            Dance. Abbi serves as the Social Justice Education Specialist at the
+            university, where she has developed a passion for student affairs
+            and elevating a sense of belonging for all students on campus. Abbi
+            is a versatile artist, practitioner, and researcher, with a primary
+            focus on diversity, inclusion, and education in both dance and
+            education. Balancing her roles as a freelance artist and an advocate
+            for social justice, Abbi strives to unite communities, audiences,
+            and perspectives, fostering a more inclusive and diverse society.
+          </p>
+          <br />
+          <!-- eboard member contact info -->
+          <div class="dbg">
+            <p class="lightbrown p-3 has-text-centered">
+              <b>Abbi Stickels | Advisor</b> <br />
+              She/Her/They/Them
+            </p>
+          </div>
         </div>
       </div>
     </div>
 
     <!--footer-->
-    <footer class="bg footer mt-6 pb-5 pt-3">
+    <footer class="bg footer mt-2 pb-5 pt-3">
       <div class="content columns is-vcentered is-multiline">
         <div class="column p-1 is-narrow">
           <p>
