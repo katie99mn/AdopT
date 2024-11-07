@@ -3,25 +3,31 @@
 body {
   font-family: "Faustina";
 }
-/* custom font color (light brown) */
+/* custom background colors */
 .bg {
   background-color: #e1d2b8;
 }
 .dbg {
   background-color: #5c4c44;
 }
-/* custom font color (dark brown) */
+/* custom font colors */
 .darkbrown {
   color: #5c4c44;
 }
 .lightbrown {
   color: #e1d2b8;
 }
+
 /* NAVBAR STYLING */
-/* adjust navbar height and remove padding*/
+/* adjust navbar height and padding*/
 .navbar-item {
-  height: 68px;
-  padding: 0;
+  padding: 12px;
+}
+@media (min-width: 1025px) {
+  .navbar-item {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
 }
 
 /* HOME PAGE ~ ABOUT US SECTION (upper half) */
