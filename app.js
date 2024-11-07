@@ -6,7 +6,6 @@ function r_e(id) {
 // NAVBAR
 // mobile burger
 r_e("burger").addEventListener("click", () => {
-  alert("clicked");
   r_e("nav-links").classList.toggle("is-active");
 });
 
