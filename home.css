@@ -17,6 +17,7 @@ body {
 .lightbrown {
   color: #e1d2b8;
 }
+/* NAVBAR STYLING */
 /* adjust navbar height and remove padding*/
 .navbar-item {
   height: 68px;
@@ -30,7 +31,6 @@ body {
 }
 /* about us text section */
 .about-us {
-  /* background-color: #e1d2b8; */
   width: 100%;
   text-align: center;
 }
@@ -52,61 +52,11 @@ body {
   box-shadow: 0px 4px 8px rgba(92, 76, 68, 0.4);
   outline: none;
 }
+/* mission photo */
 .smaller_image {
   width: 450px;
   height: auto;
   text-align: center;
-}
-
-/* Calendar */
-.calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr); /* 7 days in a week */
-  gap: 5px;
-  max-width: 450px;
-  margin: 20px auto;
-  padding: 10px;
-  background-color: #f4f4f4;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-}
-.day {
-  background-color: #fff;
-  padding: 16px;
-  text-align: center;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  position: relative;
-}
-.day:hover {
-  background-color: #e0e0e0;
-}
-.event {
-  display: none;
-  position: absolute;
-  top: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 10px;
-  background-color: #333;
-  color: white;
-  border-radius: 5px;
-  z-index: 10;
-  font-size: 12px;
-}
-
-.day:hover .event {
-  display: block;
-}
-
-/* Styling the day labels */
-.day-label {
-  font-weight: bold;
-  background-color: #3a3a3a;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
 }
 
 /* FOOTER STYLING */
@@ -134,7 +84,6 @@ footer .column {
   display: flex;
   justify-content: center;
 }
-
 .embed-container {
   display: flex;
   justify-content: center;
@@ -150,22 +99,35 @@ footer .column {
 .contact-info section {
   font-size: larger;
 }
-
+/* newsletter button */
 .subscribe {
-  background-color: #e1d2b8;
+  background-color: #8b8781;
 }
 
 /* ABOUT US PAGE */
-/* PROFILES */
-.about-hyperlink:hover {
-  color: white;
+/* MAIN ABOUT US */
+/* hyperlink colors */
+.about-us-hyperlink {
+  color: #3982b8;
 }
+.about-us-hyperlink:hover {
+  color: #3271a5;
+}
+/* profile tile shadows */
+.shadow {
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+}
+.about-tile:hover {
+  box-shadow: 0px 7px 11px rgba(0, 0, 0, 0.3);
+}
+/* square size and responsive tiles*/
 .about-tile-img {
-  width: 350px; /* Set the desired square size */
-  height: 350px;
   overflow: hidden;
   position: relative;
   margin: 0 auto;
+  width: 100%;
+  max-width: 350px;
+  aspect-ratio: 1 / 1;
 }
 .about-tile-img img {
   width: 100%;
@@ -173,20 +135,11 @@ footer .column {
   object-fit: cover;
   object-position: center;
 }
+/* PROFILES */
+.about-hyperlink:hover {
+  color: white;
+}
 .eboard_image {
-  width: 400px;
+  width: 350px;
   height: auto;
-}
-.shadow {
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2); /* Adjust as needed */
-}
-.about-tile:hover {
-  box-shadow: 0px 7px 11px rgba(0, 0, 0, 0.3);
-}
-/* MAIN ABOUT US */
-.about-us-hyperlink {
-  color: #3982b8;
-}
-.about-us-hyperlink:hover {
-  color: #3271a5;
 }
