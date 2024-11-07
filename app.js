@@ -16,7 +16,7 @@ add_bg?.addEventListener("click", () => {
 });
 
 // adding an event to a collection
-document.querySelector("#event_submit").addEventListener("click", () => {
+document.querySelector("#event_submit")?.addEventListener("click", () => {
   let name = document.querySelector("#event_name").value;
   let location = document.querySelector("#event_location").value;
   let time = document.querySelector("#event_time").value;
