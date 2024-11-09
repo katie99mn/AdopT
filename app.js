@@ -46,7 +46,6 @@ document.querySelector("#event_submit")?.addEventListener("click", () => {
     .add(event)
     .then(() => {
       alert("New event added!");
-      // show_people();
     });
 });
 
@@ -90,7 +89,7 @@ signoutbtn?.addEventListener("click", () => {
 });
 
 // Sign up
-r_e("submit_user").addEventListener("click", () => {
+r_e("submit_user")?.addEventListener("click", () => {
   let email = r_e("email").value;
   let pass = r_e("pass").value;
   // console.log(email, pass);
@@ -105,7 +104,7 @@ r_e("submit_user").addEventListener("click", () => {
 });
 
 // Sign in
-r_e("submit_user_").addEventListener("click", () => {
+r_e("submit_user_")?.addEventListener("click", () => {
   let email = r_e("email2").value;
   let pass = r_e("pass2").value;
   // console.log(email, pass);
@@ -113,36 +112,36 @@ r_e("submit_user_").addEventListener("click", () => {
   auth.signInWithEmailAndPassword(email, pass).then((user) => {});
 });
 
-auth.onAuthStateChanged((user) => {
-  if (user) {
-    // console.log(user);
-    // r_e("info").innerHTML = `<p>You are signed in as ${user.email} </p>`;
-    db.collection("users")
-      .doc(user.email)
-      .get()
-      .then((d) => {
-        // possible admin values are 0 or 1
-        // admin value of 1 means admin user. a value of 0 means no admin
-        let admin = d.data().admin;
+// auth.onAuthStateChanged((user) => {
+//   if (user) {
+//     // console.log(user);
+//     // r_e("info").innerHTML = `<p>You are signed in as ${user.email} </p>`;
+//     db.collection("users")
+//       .doc(user.email)
+//       .get()
+//       .then((d) => {
+//         // possible admin values are 0 or 1
+//         // admin value of 1 means admin user. a value of 0 means no admin
+//         let admin = d.data().admin;
 
-        if (admin == 0) {
-          // a signed-in user can only view a list of users
-          all_users("view");
-        } else {
-          // a signed-in admin user can view and edit user roles
-          all_users("edit");
-        }
+//         if (admin == 0) {
+//           // a signed-in user can only view a list of users
+//           all_users("view");
+//         } else {
+//           // a signed-in admin user can view and edit user roles
+//           all_users("edit");
+//         }
 
-        update_status(1, admin, user.uid, user.email);
-      });
-  } else {
-    // don't show user information as user isn't currently authenticated
-    all_users(0);
-    update_status(0, "", "", "");
-  }
-});
+//         update_status(1, admin, user.uid, user.email);
+//       });
+//   } else {
+//     // don't show user information as user isn't currently authenticated
+//     all_users(0);
+//     update_status(0, "", "", "");
+//   }
+// });
 
-r_e("signoutbtn").addEventListener("click", () => {
+r_e("signoutbtn")?.addEventListener("click", () => {
   auth.signOut().then(() => {
     // alert("you are signed out");
   });
