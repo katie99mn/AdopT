@@ -220,32 +220,3 @@ function update_status(yn, admin, uid, email) {
   (r_e("current_user_id").innerHTML = uid),
     (r_e("user_email").innerHTML = email);
 }
-
-auth.onAuthStateChanged((user) => {
-  if (user) {
-    // console.log(user);
-    // r_e("info").innerHTML = `<p>You are signed in as ${user.email} </p>`;
-    db.collection("users")
-      .doc(user.email)
-      .get()
-      .then((d) => {
-        // possible admin values are 0 or 1
-        // admin value of 1 means admin user. a value of 0 means no admin
-        let admin = d.data().admin;
-
-        if (admin == 0) {
-          // Make so non-admin user can't vieiw admin page button
-          // all_users("view");
-        } else {
-          // a signed-in admin user can view admin page button
-          // all_users("edit");
-        }
-
-        update_status(1, admin, user.uid, user.email);
-      });
-  } else {
-    // don't show user information as user isn't currently authenticated
-    all_users(0);
-    update_status(0, "", "", "");
-  }
-});
