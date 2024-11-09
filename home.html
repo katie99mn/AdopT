@@ -56,6 +56,9 @@
             >Contact</a
           >
         </div>
+        <div class="navbar-item is-hidden">
+          <a href="admin.html" class="has-text-weight-bold darkbrown">Admin</a>
+        </div>
         <div class="navbar-item signedout">
           <a class="button has-text-weight-bold darkbrown" id="signupbtn"
             >Sign Up</a
@@ -71,13 +74,84 @@
             >Sign Out</a
           >
         </div>
-        <!-- <div class="navbar-item">
-          <div class="buttons">
-            <a class="button signedout" id="signinbtn">Sign In</a>
-            <a class="button signedout" id="signupbtn">Sign Up</a>
-            <a class="button signedin" id="signoutbtn">Sign Out</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- sign in module -->
+  <div class="modal" id="si-mod">
+    <div class="modal-background" id="si-bg"></div>
+    <div class="modal-content has-background-light p-4">
+      <h1 class="title is-2 darkbrown">Sign In</h1>
+      <div id="si-form" class="darkbrown">
+        <!-- Email -->
+
+        <p>
+          Email:
+          <input
+            type="text"
+            class="input mt-2 mb-3"
+            id="email2"
+            placeholder="email address"
+          />
+        </p>
+
+        <p>
+          Password:
+          <input
+            type="password"
+            class="input mt-2"
+            id="pass2"
+            placeholder="password"
+          />
+        </p>
+
+        <p id="messages2" class="is-hidden">
+          errors will show here .. make this hidden
+        </p>
+        <!-- submit -->
+        <br />
+        <button class="button learn_btn" id="submit_user_">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- sign up module  -->
+  <div class="modal" id="su-mod">
+    <div class="modal-background" id="su-bg"></div>
+    <div class="modal-content has-background-light p-4">
+      <h1 class="title is-2 darkbrown">Sign Up</h1>
+      <div class="form darkbrown" id="signup-form">
+        <p>
+          Email:
+          <input
+            type="text"
+            class="input mt-2 mb-3"
+            id="email"
+            placeholder="Email"
+          />
+        </p>
+
+        <p>
+          Password:
+          <input
+            type="password"
+            class="input mt-2"
+            id="pass"
+            placeholder="Password"
+          />
+        </p>
+        <br />
+        <div class="field">
+          <div class="control">
+            <button class="button learn_btn" id="submit_user">Submit</button>
           </div>
-        </div> -->
+          <div class="control">
+            <p id="messages" class="is-hidden">
+              error messages will show here...
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
