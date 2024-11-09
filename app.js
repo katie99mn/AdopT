@@ -112,34 +112,34 @@ r_e("submit_user_")?.addEventListener("click", () => {
   auth.signInWithEmailAndPassword(email, pass).then((user) => {});
 });
 
-// auth.onAuthStateChanged((user) => {
-//   if (user) {
-//     // console.log(user);
-//     // r_e("info").innerHTML = `<p>You are signed in as ${user.email} </p>`;
-//     db.collection("users")
-//       .doc(user.email)
-//       .get()
-//       .then((d) => {
-//         // possible admin values are 0 or 1
-//         // admin value of 1 means admin user. a value of 0 means no admin
-//         let admin = d.data().admin;
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    // console.log(user);
+    // r_e("info").innerHTML = `<p>You are signed in as ${user.email} </p>`;
+    db.collection("users")
+      .doc(user.email)
+      .get()
+      .then((d) => {
+        // possible admin values are 0 or 1
+        // admin value of 1 means admin user. a value of 0 means no admin
+        let admin = d.data().admin;
 
-//         if (admin == 0) {
-//           // a signed-in user can only view a list of users
-//           all_users("view");
-//         } else {
-//           // a signed-in admin user can view and edit user roles
-//           all_users("edit");
-//         }
+        if (admin == 0) {
+          // a signed-in user can only view a list of users
+          all_users("view");
+        } else {
+          // a signed-in admin user can view and edit user roles
+          all_users("edit");
+        }
 
-//         update_status(1, admin, user.uid, user.email);
-//       });
-//   } else {
-//     // don't show user information as user isn't currently authenticated
-//     all_users(0);
-//     update_status(0, "", "", "");
-//   }
-// });
+        update_status(1, admin, user.uid, user.email);
+      });
+  } else {
+    // don't show user information as user isn't currently authenticated
+    all_users(0);
+    update_status(0, "", "", "");
+  }
+});
 
 r_e("signoutbtn")?.addEventListener("click", () => {
   auth.signOut().then(() => {
@@ -148,75 +148,75 @@ r_e("signoutbtn")?.addEventListener("click", () => {
 });
 
 // all non-admin users (column 3)
-// function all_users(mode) {
-//   // we know mode can be either 'edit', 'view', or '0'
-//   // if view mode, only a list of users is shown
-//   // if edit mode, you can change the user roles
-//   // if 0, don't show any user details - user isn't authenticated
+function all_users(mode) {
+  // we know mode can be either 'edit', 'view', or '0'
+  // if view mode, only a list of users is shown
+  // if edit mode, you can change the user roles
+  // if 0, don't show any user details - user isn't authenticated
 
-//   if (mode == 0) {
-//     // don't show any user data
-//     r_e("registered_users").innerHTML = "";
-//     r_e("admin_users").innerHTML = "";
-//     // exit the function and don't run the rest of the code
-//     return;
-//   }
+  if (mode == 0) {
+    // don't show any user data
+    r_e("registered_users").innerHTML = "";
+    r_e("admin_users").innerHTML = "";
+    // exit the function and don't run the rest of the code
+    return;
+  }
 
-//   // fill the 3rd column - non admin users
-//   db.collection("users")
-//     .where("admin", "==", 0)
-//     .get()
-//     .then((data) => {
-//       mydocs = data.docs;
-//       let html = ``;
-//       mydocs.forEach((d) => {
-//         html += `<p>${d.id}</p>`;
-//         if (mode == "edit")
-//           html += `<button id="${d.id}" onclick="make_admin('${d.id}')">Make Admin</button></p>`;
-//       });
-//       r_e("registered_users").innerHTML = html;
-//     });
+  // fill the 3rd column - non admin users
+  db.collection("users")
+    .where("admin", "==", 0)
+    .get()
+    .then((data) => {
+      mydocs = data.docs;
+      let html = ``;
+      mydocs.forEach((d) => {
+        html += `<p>${d.id}</p>`;
+        if (mode == "edit")
+          html += `<button id="${d.id}" onclick="make_admin('${d.id}')">Make Admin</button></p>`;
+      });
+      r_e("registered_users").innerHTML = html;
+    });
 
-//   // fill the 4th column - Admin users
-//   db.collection("users")
-//     .where("admin", "==", 1)
-//     .get()
-//     .then((data) => {
-//       mydocs = data.docs;
-//       let html = ``;
-//       mydocs.forEach((d) => {
-//         // we want to make sure that current user can't change their own status .. they should remain admin at all times
-//         if (d.id != auth.currentUser.email) html += `<p>${d.id}</p>`;
-//         if (mode == "edit" && d.id != auth.currentUser.email)
-//           html += `<button id="${d.id}" onclick="make_regular_user('${d.id}')">Make Regular User</button></p>`;
-//       });
-//       r_e("admin_users").innerHTML = html;
-//     });
-// }
+  // fill the 4th column - Admin users
+  db.collection("users")
+    .where("admin", "==", 1)
+    .get()
+    .then((data) => {
+      mydocs = data.docs;
+      let html = ``;
+      mydocs.forEach((d) => {
+        // we want to make sure that current user can't change their own status .. they should remain admin at all times
+        if (d.id != auth.currentUser.email) html += `<p>${d.id}</p>`;
+        if (mode == "edit" && d.id != auth.currentUser.email)
+          html += `<button id="${d.id}" onclick="make_regular_user('${d.id}')">Make Regular User</button></p>`;
+      });
+      r_e("admin_users").innerHTML = html;
+    });
+}
 
-// function make_admin(id) {
-//   db.collection("users")
-//     .doc(id)
-//     .set({
-//       admin: 1,
-//     })
-//     .then(() => all_users("edit"));
-// }
+function make_admin(id) {
+  db.collection("users")
+    .doc(id)
+    .set({
+      admin: 1,
+    })
+    .then(() => all_users("edit"));
+}
 
-// function make_regular_user(id) {
-//   db.collection("users")
-//     .doc(id)
-//     .set({
-//       admin: 0,
-//     })
-//     .then(() => all_users("edit"));
-// }
+function make_regular_user(id) {
+  db.collection("users")
+    .doc(id)
+    .set({
+      admin: 0,
+    })
+    .then(() => all_users("edit"));
+}
 
-// function update_status(yn, admin, uid, email) {
-//   // console.log("update status");
-//   // console.log(yn, uid, email)
-//   r_e("logged_in_user").innerHTML = yn;
-//   r_e("is_user_admin").innerHTML = admin;
-//   (r_e("current_user_id").innerHTML = uid),
-//     (r_e("user_email").innerHTML = email);
-// }
+function update_status(yn, admin, uid, email) {
+  // console.log("update status");
+  // console.log(yn, uid, email)
+  r_e("logged_in_user").innerHTML = yn;
+  r_e("is_user_admin").innerHTML = admin;
+  (r_e("current_user_id").innerHTML = uid),
+    (r_e("user_email").innerHTML = email);
+}
