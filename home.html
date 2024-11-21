@@ -21,6 +21,7 @@
     ></script>
   </head>
 
+  <!-- NAVIGATION -->
   <!-- navbar -->
   <div class="navbar">
     <div class="navbar-brand">
@@ -78,7 +79,8 @@
     </div>
   </div>
 
-  <!-- sign in module -->
+  <!-- MODALS -->
+  <!-- SIGN IN -->
   <div class="modal" id="si-mod">
     <div class="modal-background" id="si-bg"></div>
     <div class="modal-content has-background-light p-4">
@@ -116,7 +118,7 @@
     </div>
   </div>
 
-  <!-- sign up module  -->
+  <!-- SIGN UP  -->
   <div class="modal" id="su-mod">
     <div class="modal-background" id="su-bg"></div>
     <div class="modal-content has-background-light p-4">
@@ -155,11 +157,11 @@
       </div>
     </div>
   </div>
-
   <div
     id="message_bar"
     class="has-text-centered has-background-info-light is-hidden p-4"
   ></div>
+  <!-- HOME PAGE -->
   <body>
     <div id="hometab" class="">
       <!--about us-->
@@ -224,16 +226,12 @@
             <img src="indeximages/General_Meeting.png" class="smaller_image" />
           </div>
           <div class="column is-6 has-text-centered">
-            <p class="is-size-2 has-text-centered">Looking Ahead</p>
-            <!-- <div>
-          <label for="calendar">Choose a date:</label>
-          <input type="date" id="calendar" name="calendar" />
-        </div> -->
+            <p class="is-size-2 has-text-centered pb-5">Looking Ahead</p>
             <!-- Calendar -->
             <div class="calendar">
               <!-- Days with events -->
               <iframe
-                src="https://calendar.google.com/calendar/u/2?cid=YWRvcHR1dy5tYWRpc29uQGdtYWlsLmNvbQ"
+                src="https://calendar.google.com/calendar/embed?src=adoptuw.madison%40gmail.com&ctz=America%2FChicago"
                 style="border: 0"
                 width="425"
                 height="450"
@@ -537,6 +535,7 @@
       </div>
     </div>
 
+    <!-- ABOUT US PAGE -->
     <div id="abouttab" class="is-hidden">
       <!-- full mission statement -->
       <div class="about-us">
@@ -760,6 +759,7 @@
       </div>
     </div>
 
+    <!-- EVENTS PAGE -->
     <div id="eventstab" class="is-hidden">
       <!--events header-->
       <div class="about-us bg">
@@ -778,7 +778,9 @@
 
           <div class="pb-6">
             <!--event calendar-->
-            <a href="about.html">
+            <a
+              hre="https://calendar.google.com/calendar/embed?src=adoptuw.madison%40gmail.com&ctz=America%2FChicago"
+            >
               <button class="button learn_btn mt-4 mr-1 is-size-5">
                 Event Calendar
               </button></a
@@ -937,6 +939,8 @@
         </div>
       </div>
     </div>
+
+    <!-- CONTACT US PAGE -->
     <div id="contacttab" class="is-hidden">
       <div class="bg about-us">
         <div class="pb-1">
@@ -1043,30 +1047,9 @@
           >
         </div>
       </div>
-
-      <!-- Newsletter Subscription Section -->
-      <div class="has-text-centered subscribe pb-5 pt-4">
-        <p class="pt-7 subtitle">
-          <i><b>Subscribe to our newsletter</b></i>
-        </p>
-
-        <form>
-          <div class="field is-grouped is-grouped-centered">
-            <p class="control">
-              <input
-                class="input"
-                type="email"
-                placeholder="Enter your email"
-                required
-              />
-            </p>
-            <p class="control">
-              <button type="submit" class="button learn_btn">Subscribe</button>
-            </p>
-          </div>
-        </form>
-      </div>
     </div>
+
+    <!-- ABOUT US PROFILES -->
     <div id="about_abbi" class="is-hidden">
       <!-- EBOARD MEMBER INFO -->
       <div class="about-us bg">
@@ -1426,85 +1409,7 @@
     </div>
   </body>
 
-  <!-- sign in module -->
-  <div class="modal" id="si-mod">
-    <div class="modal-background" id="si-bg"></div>
-    <div class="modal-content has-background-light p-4">
-      <h1 class="title is-2 darkbrown">Sign In</h1>
-      <div id="si-form" class="darkbrown">
-        <!-- Email -->
-
-        <p>
-          Email:
-          <input
-            type="text"
-            class="input mt-2 mb-3"
-            id="email2"
-            placeholder="email address"
-          />
-        </p>
-
-        <p>
-          Password:
-          <input
-            type="password"
-            class="input mt-2"
-            id="pass2"
-            placeholder="password"
-          />
-        </p>
-
-        <p id="messages2" class="is-hidden">
-          errors will show here .. make this hidden
-        </p>
-        <!-- submit -->
-        <br />
-        <button class="button learn_btn" id="submit_user_">Submit</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- sign up module  -->
-  <div class="modal" id="su-mod">
-    <div class="modal-background" id="su-bg"></div>
-    <div class="modal-content has-background-light p-4">
-      <h1 class="title is-2 darkbrown">Sign Up</h1>
-      <div class="form darkbrown" id="signup-form">
-        <p>
-          Email:
-          <input
-            type="text"
-            class="input mt-2 mb-3"
-            id="email"
-            placeholder="Email"
-          />
-        </p>
-
-        <p>
-          Password:
-          <input
-            type="password"
-            class="input mt-2"
-            id="pass"
-            placeholder="Password"
-          />
-        </p>
-        <br />
-        <div class="field">
-          <div class="control">
-            <button class="button learn_btn" id="submit_user">Submit</button>
-          </div>
-          <div class="control">
-            <p id="messages" class="is-hidden">
-              error messages will show here...
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!--footer-->
+  <!-- FOOTER -->
   <footer class="bg footer mt-6 pb-5 pt-3">
     <div class="content columns is-vcentered is-multiline">
       <div class="column p-1 is-narrow">
@@ -1535,7 +1440,7 @@
     </div>
   </footer>
 
-  <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+  <!-- FIREBASE SCRIPTS -->
 
   <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
