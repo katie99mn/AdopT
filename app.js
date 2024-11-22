@@ -49,6 +49,34 @@ document.querySelector("#event_submit")?.addEventListener("click", () => {
     });
 });
 
+function show_events() {
+  db.collection("events")
+    .get()
+    .then((data) => {
+      let docs = data.docs;
+
+      let html = ``;
+      docs.forEach((event) => {
+        html += `<div class="columns mt-2">
+          <div class="column is-6 ml-3 mr-2">
+            <img src="indeximages/a1.png" class="smaller_image" alt="Event" />
+          </div>
+          <div class="column is-6 mr-2">
+            <p class="is-size-2">${event.data().name}</p>
+            <p class="is-size-3">Location: ${event.data().location}</p>
+            <p class="is-size-3">Time: ${event.data().time}</p>
+            <p class="is-size-3">Type: ${event.data().type}</p>
+            <br />
+            <p class="is-size-5">${event.data().description}</p>
+          </div>
+        </div>`;
+      });
+
+      document.querySelector("#all_events").innerHTML = html;
+    });
+}
+show_events();
+
 // sign in JS
 let signinbtn = r_e("signinbtn");
 let signinmod = r_e("si-mod");
