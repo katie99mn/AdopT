@@ -42,23 +42,27 @@
     <div id="nav-links" class="navbar-menu p-1">
       <div class="navbar-end">
         <div class="navbar-item">
-          <a href="home.html" class="has-text-weight-bold darkbrown">Home</a>
+          <a href="#" id="home" class="has-text-weight-bold darkbrown">Home</a>
         </div>
         <div class="navbar-item">
-          <a href="about.html" class="has-text-weight-bold darkbrown">About</a>
+          <a href="#" id="about" class="has-text-weight-bold darkbrown"
+            >About</a
+          >
         </div>
         <div class="navbar-item">
-          <a href="events.html" class="has-text-weight-bold darkbrown"
+          <a href="#" id="events" class="has-text-weight-bold darkbrown"
             >Events</a
           >
         </div>
         <div class="navbar-item">
-          <a href="contact.html" class="has-text-weight-bold darkbrown"
+          <a href="#" id="contact" class="has-text-weight-bold darkbrown"
             >Contact</a
           >
         </div>
         <div id="admin_nav" class="navbar-item is-hidden">
-          <a href="admin.html" class="has-text-weight-bold darkbrown">Admin</a>
+          <a href="#" id="admin" class="has-text-weight-bold darkbrown"
+            >Admin</a
+          >
         </div>
         <div class="navbar-item signedout">
           <a class="button has-text-weight-bold darkbrown" id="signupbtn"
@@ -183,7 +187,7 @@
             </p>
           </div>
           <div class="pb-6">
-            <a href="about.html">
+            <a href="#" id="learn_more">
               <button class="button learn_btn mt-4 is-size-5">
                 Learn More
               </button></a
@@ -579,7 +583,7 @@
                 class="about-tile shadow"
               >
                 <div class="about-tile-img">
-                  <a href="about_grace.html"
+                  <a href="#" id="grace"
                     ><img src="indeximages/grace_drayton.jpg"
                   /></a>
                 </div>
@@ -611,7 +615,7 @@
                 class="about-tile shadow"
               >
                 <div class="about-tile-img">
-                  <a href="about_lacey.html"
+                  <a href="#" id="lacey"
                     ><img src="indeximages/lacey_coyne.jpg"
                   /></a>
                 </div>
@@ -643,7 +647,7 @@
                 class="about-tile shadow"
               >
                 <div class="about-tile-img">
-                  <a href="about_david.html"
+                  <a href="#" id="david"
                     ><img src="indeximages/david-izzo.jpg"
                   /></a>
                 </div>
@@ -677,7 +681,7 @@
                 class="about-tile shadow"
               >
                 <div class="about-tile-img">
-                  <a href="about_ruby.html"
+                  <a href="#" id="ruby"
                     ><img src="indeximages/ruby_slavin.jpg"
                   /></a>
                 </div>
@@ -709,7 +713,7 @@
                 class="about-tile shadow"
               >
                 <div class="about-tile-img">
-                  <a href="about_shu_lan.html"
+                  <a href="#" id="shu_lan"
                     ><img src="indeximages/shulan_schaut.jpg"
                   /></a>
                 </div>
@@ -743,7 +747,7 @@
                 class="shadow about-tile"
               >
                 <div class="about-tile-img">
-                  <a href="about_abbi.html"
+                  <a href="#" id="abbi"
                     ><img src="indeximages/abbi_stickels.jpg"
                   /></a>
                 </div>
@@ -849,8 +853,9 @@
           </div>
         </div>
       </div>
-      <!--events body-->
-      <div class="section event1-bg" id="all_events"></div>
+    </div>
+    <!--events body-->
+    <div class="section event1-bg is-hidden" id="all_events"></div>
     <!-- CONTACT US PAGE -->
     <div id="contacttab" class="is-hidden">
       <div class="bg about-us">
@@ -1314,6 +1319,31 @@
                 <br />
               </p>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="admintab" class="is-hidden">
+      <!-- admin lookup -->
+      <div id="auth" class="m-2 p-3">
+        <div class="p-3 m-6 bg">
+          <p>Is User logged-in? (0/1): <span id="logged_in_user"></span></p>
+          <p>Is User admin? (0/1): <span id="is_user_admin"></span></p>
+          <p>User ID: <span id="current_user_id"></span></p>
+          <p>User Email: <span id="user_email"></span></p>
+        </div>
+        <div class="columns">
+          <!-- Non-admin users -->
+          <div class="column mr-3 bg">
+            <h1 class="title">Non-Admin Users</h1>
+            <div id="registered_users"></div>
+          </div>
+
+          <!-- admin users -->
+          <div class="column bg">
+            <h1 class="title">Admin Users</h1>
+            <div id="admin_users"></div>
           </div>
         </div>
       </div>

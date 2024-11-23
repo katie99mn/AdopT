@@ -248,3 +248,183 @@ function update_status(yn, admin, uid, email) {
   (r_e("current_user_id").innerHTML = uid),
     (r_e("user_email").innerHTML = email);
 }
+
+r_e("home").addEventListener("click", () => {
+  r_e("hometab").classList.remove("is-hidden");
+  r_e("abouttab").classList.add("is-hidden");
+  r_e("eventstab").classList.add("is-hidden");
+  r_e("all_events").classList.add("is-hidden");
+  r_e("contacttab").classList.add("is-hidden");
+  r_e("admintab").classList.add("is-hidden");
+  r_e("about_abbi").classList.add("is-hidden");
+  r_e("about_david").classList.add("is-hidden");
+  r_e("about_grace").classList.add("is-hidden");
+  r_e("about_lacey").classList.add("is-hidden");
+  r_e("about_ruby").classList.add("is-hidden");
+  r_e("about_shu_lan").classList.add("is-hidden");
+});
+
+r_e("about").addEventListener("click", () => {
+  r_e("hometab").classList.add("is-hidden");
+  r_e("abouttab").classList.remove("is-hidden");
+  r_e("eventstab").classList.add("is-hidden");
+  r_e("all_events").classList.add("is-hidden");
+  r_e("contacttab").classList.add("is-hidden");
+  r_e("admintab").classList.add("is-hidden");
+  r_e("about_abbi").classList.add("is-hidden");
+  r_e("about_david").classList.add("is-hidden");
+  r_e("about_grace").classList.add("is-hidden");
+  r_e("about_lacey").classList.add("is-hidden");
+  r_e("about_ruby").classList.add("is-hidden");
+  r_e("about_shu_lan").classList.add("is-hidden");
+});
+
+r_e("events").addEventListener("click", () => {
+  r_e("hometab").classList.add("is-hidden");
+  r_e("abouttab").classList.add("is-hidden");
+  r_e("eventstab").classList.remove("is-hidden");
+  r_e("all_events").classList.remove("is-hidden");
+  r_e("contacttab").classList.add("is-hidden");
+  r_e("admintab").classList.add("is-hidden");
+  r_e("about_abbi").classList.add("is-hidden");
+  r_e("about_david").classList.add("is-hidden");
+  r_e("about_grace").classList.add("is-hidden");
+  r_e("about_lacey").classList.add("is-hidden");
+  r_e("about_ruby").classList.add("is-hidden");
+  r_e("about_shu_lan").classList.add("is-hidden");
+});
+
+r_e("contact").addEventListener("click", () => {
+  r_e("hometab").classList.add("is-hidden");
+  r_e("abouttab").classList.add("is-hidden");
+  r_e("eventstab").classList.add("is-hidden");
+  r_e("all_events").classList.add("is-hidden");
+  r_e("contacttab").classList.remove("is-hidden");
+  r_e("admintab").classList.add("is-hidden");
+  r_e("about_abbi").classList.add("is-hidden");
+  r_e("about_david").classList.add("is-hidden");
+  r_e("about_grace").classList.add("is-hidden");
+  r_e("about_lacey").classList.add("is-hidden");
+  r_e("about_ruby").classList.add("is-hidden");
+  r_e("about_shu_lan").classList.add("is-hidden");
+});
+
+r_e("abbi").addEventListener("click", () => {
+  r_e("hometab").classList.add("is-hidden");
+  r_e("abouttab").classList.add("is-hidden");
+  r_e("eventstab").classList.add("is-hidden");
+  r_e("all_events").classList.add("is-hidden");
+  r_e("contacttab").classList.add("is-hidden");
+  r_e("admintab").classList.add("is-hidden");
+  r_e("about_abbi").classList.remove("is-hidden");
+  r_e("about_david").classList.add("is-hidden");
+  r_e("about_grace").classList.add("is-hidden");
+  r_e("about_lacey").classList.add("is-hidden");
+  r_e("about_ruby").classList.add("is-hidden");
+  r_e("about_shu_lan").classList.add("is-hidden");
+});
+
+r_e("david").addEventListener("click", () => {
+  r_e("hometab").classList.add("is-hidden");
+  r_e("abouttab").classList.add("is-hidden");
+  r_e("eventstab").classList.add("is-hidden");
+  r_e("all_events").classList.add("is-hidden");
+  r_e("contacttab").classList.add("is-hidden");
+  r_e("admintab").classList.add("is-hidden");
+  r_e("about_abbi").classList.add("is-hidden");
+  r_e("about_david").classList.remove("is-hidden");
+  r_e("about_grace").classList.add("is-hidden");
+  r_e("about_lacey").classList.add("is-hidden");
+  r_e("about_ruby").classList.add("is-hidden");
+  r_e("about_shu_lan").classList.add("is-hidden");
+});
+
+r_e("grace").addEventListener("click", () => {
+  r_e("hometab").classList.add("is-hidden");
+  r_e("abouttab").classList.add("is-hidden");
+  r_e("eventstab").classList.add("is-hidden");
+  r_e("all_events").classList.add("is-hidden");
+  r_e("contacttab").classList.add("is-hidden");
+  r_e("admintab").classList.add("is-hidden");
+  r_e("about_abbi").classList.add("is-hidden");
+  r_e("about_david").classList.add("is-hidden");
+  r_e("about_grace").classList.remove("is-hidden");
+  r_e("about_lacey").classList.add("is-hidden");
+  r_e("about_ruby").classList.add("is-hidden");
+  r_e("about_shu_lan").classList.add("is-hidden");
+});
+
+r_e("lacey").addEventListener("click", () => {
+  r_e("hometab").classList.add("is-hidden");
+  r_e("abouttab").classList.add("is-hidden");
+  r_e("eventstab").classList.add("is-hidden");
+  r_e("all_events").classList.add("is-hidden");
+  r_e("contacttab").classList.add("is-hidden");
+  r_e("admintab").classList.add("is-hidden");
+  r_e("about_abbi").classList.add("is-hidden");
+  r_e("about_david").classList.add("is-hidden");
+  r_e("about_grace").classList.add("is-hidden");
+  r_e("about_lacey").classList.remove("is-hidden");
+  r_e("about_ruby").classList.add("is-hidden");
+  r_e("about_shu_lan").classList.add("is-hidden");
+});
+
+r_e("ruby").addEventListener("click", () => {
+  r_e("hometab").classList.add("is-hidden");
+  r_e("abouttab").classList.add("is-hidden");
+  r_e("eventstab").classList.add("is-hidden");
+  r_e("all_events").classList.add("is-hidden");
+  r_e("contacttab").classList.add("is-hidden");
+  r_e("admintab").classList.add("is-hidden");
+  r_e("about_abbi").classList.add("is-hidden");
+  r_e("about_david").classList.add("is-hidden");
+  r_e("about_grace").classList.add("is-hidden");
+  r_e("about_lacey").classList.add("is-hidden");
+  r_e("about_ruby").classList.remove("is-hidden");
+  r_e("about_shu_lan").classList.add("is-hidden");
+});
+
+r_e("shu_lan").addEventListener("click", () => {
+  r_e("hometab").classList.add("is-hidden");
+  r_e("abouttab").classList.add("is-hidden");
+  r_e("eventstab").classList.add("is-hidden");
+  r_e("all_events").classList.add("is-hidden");
+  r_e("contacttab").classList.add("is-hidden");
+  r_e("admintab").classList.add("is-hidden");
+  r_e("about_abbi").classList.add("is-hidden");
+  r_e("about_david").classList.add("is-hidden");
+  r_e("about_grace").classList.add("is-hidden");
+  r_e("about_lacey").classList.add("is-hidden");
+  r_e("about_ruby").classList.add("is-hidden");
+  r_e("about_shu_lan").classList.remove("is-hidden");
+});
+
+r_e("admin").addEventListener("click", () => {
+  r_e("hometab").classList.add("is-hidden");
+  r_e("abouttab").classList.add("is-hidden");
+  r_e("eventstab").classList.add("is-hidden");
+  r_e("all_events").classList.add("is-hidden");
+  r_e("contacttab").classList.add("is-hidden");
+  r_e("admintab").classList.remove("is-hidden");
+  r_e("about_abbi").classList.add("is-hidden");
+  r_e("about_david").classList.add("is-hidden");
+  r_e("about_grace").classList.add("is-hidden");
+  r_e("about_lacey").classList.add("is-hidden");
+  r_e("about_ruby").classList.add("is-hidden");
+  r_e("about_shu_lan").classList.add("is-hidden");
+});
+
+r_e("learn_more").addEventListener("click", () => {
+  r_e("hometab").classList.add("is-hidden");
+  r_e("abouttab").classList.remove("is-hidden");
+  r_e("eventstab").classList.add("is-hidden");
+  r_e("all_events").classList.add("is-hidden");
+  r_e("contacttab").classList.add("is-hidden");
+  r_e("admintab").classList.add("is-hidden");
+  r_e("about_abbi").classList.add("is-hidden");
+  r_e("about_david").classList.add("is-hidden");
+  r_e("about_grace").classList.add("is-hidden");
+  r_e("about_lacey").classList.add("is-hidden");
+  r_e("about_ruby").classList.add("is-hidden");
+  r_e("about_shu_lan").classList.add("is-hidden");
+});
