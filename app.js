@@ -106,6 +106,16 @@ signupbg?.addEventListener("click", () => {
   signupmod.classList.remove("is-active");
 });
 
+function configure_message_bar(msg) {
+  r_e("message-bar").innerHTML = msg;
+
+  r_e("message-bar").classList.remove("is-hidden");
+
+  setTimeout(() => {
+    r_e("message-bar").classList.add("is-hidden");
+    r_e("message-bar").innerHTML = "";
+  }, 3000);
+}
 // sign out code
 let signoutbtn = r_e("signoutbtn");
 signoutbtn?.addEventListener("click", () => {
@@ -123,7 +133,8 @@ r_e("submit_user")?.addEventListener("click", () => {
   // console.log(email, pass);
 
   auth.createUserWithEmailAndPassword(email, pass).then((user) => {
-    console.log("user");
+    configure_message_bar(`Email: ${auth.currentUser.email} has signed up`);
+
     console.log(user.user.uid);
     db.collection("users").doc(user.user.email).set({
       admin: 0,
@@ -137,13 +148,54 @@ r_e("submit_user_")?.addEventListener("click", () => {
   let pass = r_e("pass2").value;
   // console.log(email, pass);
 
-  auth.signInWithEmailAndPassword(email, pass).then((user) => {});
+  auth.signInWithEmailAndPassword(email, pass).then((user) => {
+    configure_message_bar(`Welcome back ${auth.currentUser.email}!`);
+    signinmod.classList.add("is-hidden");
+  });
 });
+
+function configure_nav_bar(nameuser) {
+  // check if there is a current user
+
+  let signedinlinks = document.querySelectorAll(".signedin");
+  let signedoutlinks = document.querySelectorAll(".signedout");
+
+  if (nameuser) {
+    // user exists
+
+    // show all elements with the class signedin
+
+    signedinlinks.forEach((l) => {
+      l.classList.remove("is-hidden");
+    });
+
+    // hide all elements with the class signedout
+
+    signedoutlinks.forEach((l) => {
+      l.classList.add("is-hidden");
+    });
+  } else {
+    // no current user
+
+    // hide all elements with the class signedin
+    signedinlinks.forEach((l) => {
+      l.classList.add("is-hidden");
+    });
+
+    // show all elements with the class signedout
+
+    signedoutlinks.forEach((l) => {
+      l.classList.remove("is-hidden");
+    });
+  }
+}
 
 auth.onAuthStateChanged((user) => {
   if (user) {
-    // console.log(user);
-    // r_e("info").innerHTML = `<p>You are signed in as ${user.email} </p>`;
+    console.log(user.uid);
+    configure_nav_bar(auth.currentUser.email);
+    r_e("email-nav").innerHTML = auth.currentUser.email;
+
     db.collection("users")
       .doc(user.email)
       .get()
@@ -163,6 +215,7 @@ auth.onAuthStateChanged((user) => {
         update_status(1, admin, user.uid, user.email);
       });
   } else {
+    configure_nav_bar();
     // don't show user information as user isn't currently authenticated
     all_users(0);
     update_status(0, "", "", "");
