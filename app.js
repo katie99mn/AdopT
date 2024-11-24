@@ -148,10 +148,24 @@ r_e("submit_user_")?.addEventListener("click", () => {
   let pass = r_e("pass2").value;
   // console.log(email, pass);
 
-  auth.signInWithEmailAndPassword(email, pass).then((user) => {
-    configure_message_bar(`Welcome back ${auth.currentUser.email}!`);
-    signinmod.classList.add("is-hidden");
-  });
+  auth
+    .signInWithEmailAndPassword(email, pass)
+    .then((user) => {
+      configure_message_bar(`Welcome back ${auth.currentUser.email}!`);
+      signinmod.classList.add("is-hidden");
+    })
+    .catch((err) => {
+      // display error message on modal
+      console.log(err.message);
+
+      // show the paragraph with ID messages
+      r_e("messages2").classList.remove("is-hidden");
+
+      // make text color red
+      r_e("messages2").classList.add("has-text-danger");
+      // show the error message
+      r_e("messages2").innerHTML = err.message;
+    });
 });
 
 function configure_nav_bar(nameuser) {
