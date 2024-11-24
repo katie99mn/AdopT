@@ -495,3 +495,18 @@ r_e("learn_more").addEventListener("click", () => {
   r_e("about_ruby").classList.add("is-hidden");
   r_e("about_shu_lan").classList.add("is-hidden");
 });
+
+// HOME PAGE IMG UPLOAD
+document
+  .getElementById("home_upload_img")
+  .addEventListener("change", function () {
+    const file = this.files[0];
+    const eventImage = document.getElementById("current_event_img");
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        eventImage.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
