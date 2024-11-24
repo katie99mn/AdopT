@@ -194,8 +194,8 @@
 
       <!-- mission statement -->
       <div class="section">
-        <div class="columns mt-2">
-          <div class="column is-6 ml-6 mr-2">
+        <div class="columns is-variable is-6 is-multiline">
+          <div class="column is-12-tablet is-6-desktop">
             <p class="is-size-2">Our Mission</p>
             <p class="is-size-1">Find & Build Community.</p>
             <br />
@@ -209,32 +209,47 @@
             </p>
           </div>
 
-          <div class="column is-6 ml-6 mr-2">
+          <div
+            class="column is-12-tablet is-6-desktop is-flex is-align-items-center is-justify-content-center"
+          >
             <img
-              src="indeximages/Mission_image.png"
-              class="smaller_image"
+              class="mission_img"
+              src="indeximages/group_photo.jpg"
               alt="group photo"
             />
           </div>
         </div>
       </div>
-      <!-- Upcoming Event & Looking Ahead -->
-      <div class="section">
-        <div class="columns mt-2">
+      <!--  upcoming event and looking ahead -->
+      <div class="section pt-2">
+        <div class="columns">
+          <!-- upcoming event -->
           <div class="column is-6 has-text-centered">
-            <p class="is-size-2 has-text-centered pb-5">Upcoming Event</p>
-            <img src="indeximages/General_Meeting.png" class="smaller_image" />
+            <p class="is-size-2 has-text-centered pb-3">Upcoming Event</p>
+            <!-- event image upload -->
+            <div class="square_format">
+              <img
+                id="current_event_img"
+                src="indeximages/General_Meeting.png"
+                class="square_content"
+              />
+            </div>
+            <!-- image upload button -->
+            <input
+              type="file"
+              id="home_upload_img"
+              class="button mt-3"
+              accept="image/*"
+            />
           </div>
+          <!-- looking ahead -->
           <div class="column is-6 has-text-centered">
-            <p class="is-size-2 has-text-centered pb-5">Looking Ahead</p>
-            <!-- Calendar -->
-            <div class="calendar">
-              <!-- Days with events -->
+            <p class="is-size-2 has-text-centered pb-3">Looking Ahead</p>
+            <!-- google calendar -->
+            <div class="square_format">
               <iframe
                 src="https://calendar.google.com/calendar/embed?src=adoptuw.madison%40gmail.com&ctz=America%2FChicago"
-                style="border: 0"
-                width="425"
-                height="450"
+                class="square_content"
                 frameborder="0"
                 scrolling="no"
               ></iframe>

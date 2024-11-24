@@ -220,3 +220,18 @@ function update_status(yn, admin, uid, email) {
   (r_e("current_user_id").innerHTML = uid),
     (r_e("user_email").innerHTML = email);
 }
+
+// HOME PAGE IMG UPLOAD
+document
+  .getElementById("home_upload_img")
+  .addEventListener("change", function () {
+    const file = this.files[0];
+    const eventImage = document.getElementById("current_event_img");
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        eventImage.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
