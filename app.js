@@ -288,6 +288,154 @@ function all_users(mode) {
       r_e("admin_users").innerHTML = html;
     });
 }
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    // Check admin role from Firestore
+    db.collection("users")
+      .doc(user.email)
+      .get()
+      .then((doc) => {
+        const isAdmin = doc.data()?.admin === 1; // Admin flag is 1 for admin users
+        toggleAdminNav(isAdmin); // Pass the correct admin flag to the function
+      })
+      .catch((err) => {
+        console.error("Error fetching admin data:", err);
+      });
+  } else {
+    // Hide admin nav if no user is logged in
+    toggleAdminNav(false);
+  }
+});
+function toggleAdminNav(isAdmin) {
+  const adminNav = r_e("admin_nav"); // Get the admin navbar item
+  if (isAdmin) {
+    adminNav.classList.remove("is-hidden"); // Show the admin button
+  } else {
+    adminNav.classList.add("is-hidden"); // Hide the admin button
+  }
+}
+
+// Event button for admins
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    // User is logged in, check their admin status
+    db.collection("users")
+      .doc(user.email)
+      .get()
+      .then((doc) => {
+        const isAdmin = doc.data()?.admin === 1; // Check if admin flag is set
+        toggleAddEventButton(isAdmin); // Toggle the button visibility
+      })
+      .catch((err) => {
+        console.error("Error fetching admin data:", err);
+        toggleAddEventButton(false); // Hide the button if there's an error
+      });
+  } else {
+    // No user is logged in, hide the button
+    toggleAddEventButton(false);
+  }
+});
+function toggleAddEventButton(isAdmin) {
+  const addEventButton = r_e("add_btn"); // Get the Add Event button
+  if (isAdmin) {
+    addEventButton.classList.remove("is-hidden"); // Show the button
+  } else {
+    addEventButton.classList.add("is-hidden"); // Hide the button
+  }
+}
+
+function renderEvents(isAdmin) {
+  const eventsContainer = r_e("all_events");
+  eventsContainer.innerHTML = ""; // Clear previous content
+
+  db.collection("events")
+    .get()
+    .then((snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        const event = doc.data();
+        const eventId = doc.id;
+
+        // Create event element
+        const eventDiv = document.createElement("div");
+        eventDiv.classList.add("columns", "mt-2");
+
+        eventDiv.innerHTML = `
+          <div class="column is-6 ml-3 mr-2">
+            <img src="indeximages/a1.png" class="smaller_image" alt="Event" />
+          </div>
+          <div class="column is-6 mr-2">
+            <div class="event-details">
+              <p class="is-size-2">${event.name}</p>
+              <p class="is-size-3">Location: ${event.location}</p>
+              <p class="is-size-3">Time: ${event.time}</p>
+              <p class="is-size-3">Type: ${event.type}</p>
+              <br />
+              <p class="is-size-5">${event.description}</p>
+            </div>
+          </div>
+        `;
+
+        // Add delete button if the user is an admin
+        if (isAdmin) {
+          const deleteButton = document.createElement("button");
+          deleteButton.classList.add(
+            "button",
+            "is-danger",
+            "mt-2",
+            "delete-btn"
+          );
+          deleteButton.textContent = "Delete Event";
+          deleteButton.addEventListener("click", () => deleteEvent(eventId)); // Attach delete event listener
+
+          // Append the button inside the event details column
+          eventDiv.querySelector(".event-details").appendChild(deleteButton);
+        }
+
+        eventsContainer.appendChild(eventDiv);
+      });
+    })
+    .catch((err) => {
+      console.error("Error fetching events:", err);
+    });
+}
+// Firestore delete event
+function deleteEvent(eventId) {
+  // Confirm deletion
+  const confirmDelete = confirm("Are you sure you want to delete this event?");
+  if (!confirmDelete) return;
+
+  // Delete the event from Firestore
+  db.collection("events")
+    .doc(eventId)
+    .delete()
+    .then(() => {
+      alert("Event deleted successfully!");
+      renderEvents(true); // Refresh the event list for the admin
+    })
+    .catch((err) => {
+      console.error("Error deleting event:", err);
+      alert("Failed to delete event.");
+    });
+}
+// Show Delete button for only admins
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    // Check if the user is an admin
+    db.collection("users")
+      .doc(user.email)
+      .get()
+      .then((doc) => {
+        const isAdmin = doc.data()?.admin === 1;
+        renderEvents(isAdmin); // Render events with or without delete buttons
+      })
+      .catch((err) => {
+        console.error("Error checking admin role:", err);
+        renderEvents(false); // Render without delete buttons in case of error
+      });
+  } else {
+    renderEvents(false); // Render events without delete buttons for logged-out users
+  }
+});
 
 function make_admin(id) {
   db.collection("users")
