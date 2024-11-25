@@ -497,28 +497,12 @@ r_e("learn_more").addEventListener("click", () => {
 });
 
 // HOME PAGE IMG UPLOAD
-document
-  .getElementById("home_upload_img")
-  .addEventListener("change", function () {
-    let file = this.files[0];
-    if (!file) return;
-
-    let imagename = new Date().getTime() + "_" + file.name;
-    const image = firebase.storage().ref("event_images/" + imagename);
-    const task = image.put(file);
-
-    task
-      .then((snapshot) => {
-        return snapshot.ref.getDownloadURL();
-      })
-      .then((url) => {
-        const upcomingeventdata = {
-          image: url,
-          uploadedAt: firebase.firestore.FieldValue.serverTimestamp(),
-        };
-        firebase
-          .firestore()
-          .collection("upcoming_events")
-          .add(upcomingeventdata);
-      });
-  });
+const fileInput = document.querySelector(
+  "#upcoming_event_img input[type=file]"
+);
+fileInput.onchange = () => {
+  if (fileInput.files.length > 0) {
+    const fileName = document.querySelector("#upcoming_event_img .file-name");
+    fileName.textContent = fileInput.files[0].name;
+  }
+};
