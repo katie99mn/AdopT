@@ -59,6 +59,13 @@ function show_events() {
 
       let html = ``;
       docs.forEach((event) => {
+        let date = new Date(event.data().date);
+        let formattedDate = date.toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        });
+
         html += `<div class="columns mt-2">
           <div class="column is-5 ml-4">
             <img src="indeximages/a1.png" class="smaller_image" alt="Event" />
@@ -66,7 +73,7 @@ function show_events() {
           <div class="column is-7 mt-4 mr-4">
             <p class="is-size-3">${event.data().name}</p><br />
             <p class="is-size-4">Location: ${event.data().location}</p>
-            <p class="is-size-4">Date: ${event.data().date}</p>
+            <p class="is-size-4">Date: ${formattedDate}</p>
             <p class="is-size-4">Time: ${event.data().time}</p>
             <p class="is-size-4">Type: ${event.data().type}</p>
             <br />
