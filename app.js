@@ -500,9 +500,18 @@ r_e("learn_more").addEventListener("click", () => {
 const fileInput = document.querySelector(
   "#upcoming_event_img input[type=file]"
 );
-fileInput.onchange = () => {
+const imageElement = document.getElementById("upcoming_event_img_placeholder");
+const fileNameElement = document.querySelector(
+  "#upcoming_event_img .file-name"
+);
+fileInput.addEventListener("change", () => {
   if (fileInput.files.length > 0) {
-    const fileName = document.querySelector("#upcoming_event_img .file-name");
-    fileName.textContent = fileInput.files[0].name;
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    fileNameElement.textContent = file.name;
+    reader.onload = (event) => {
+      imageElement.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
   }
-};
+});
