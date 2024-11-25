@@ -57,6 +57,12 @@ function show_events() {
     .then((data) => {
       let docs = data.docs;
 
+      docs.sort((a, b) => {
+        let dateA = new Date(a.data().date);
+        let dateB = new Date(b.data().date);
+        return dateB - dateA;
+      });
+
       let html = ``;
       docs.forEach((event) => {
         let date = new Date(event.data().date);
