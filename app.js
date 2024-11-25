@@ -66,6 +66,13 @@ function show_events() {
           year: "numeric",
         });
 
+        let eventTime = new Date("1970-01-01T" + event.data().time + "Z");
+        let formattedTime = eventTime.toLocaleString("en-US", {
+          hour: "numeric",
+          minute: "numeric",
+          hour12: true,
+        });
+
         html += `<div class="columns mt-2">
           <div class="column is-5 ml-4">
             <img src="indeximages/a1.png" class="smaller_image" alt="Event" />
@@ -74,7 +81,7 @@ function show_events() {
             <p class="is-size-3">${event.data().name}</p><br />
             <p class="is-size-4">Location: ${event.data().location}</p>
             <p class="is-size-4">Date: ${formattedDate}</p>
-            <p class="is-size-4">Time: ${event.data().time}</p>
+            <p class="is-size-4">Time: ${formattedTime}</p>
             <p class="is-size-4">Type: ${event.data().type}</p>
             <br />
             <p class="is-size-5">${event.data().description}</p>
