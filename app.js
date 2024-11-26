@@ -28,6 +28,7 @@ add_bg?.addEventListener("click", () => {
 document.querySelector("#event_submit")?.addEventListener("click", () => {
   let name = document.querySelector("#event_name").value;
   let location = document.querySelector("#event_location").value;
+  let date = document.querySelector("#event_date").value;
   let time = document.querySelector("#event_time").value;
   let type = document.querySelector("#event_type").value;
   let description = document.querySelector("#event_description").value;
@@ -36,6 +37,7 @@ document.querySelector("#event_submit")?.addEventListener("click", () => {
   let event = {
     name: name,
     location: location,
+    date: date,
     time: time,
     type: type,
     description: description,
@@ -55,17 +57,38 @@ function show_events() {
     .then((data) => {
       let docs = data.docs;
 
+      docs.sort((a, b) => {
+        let dateA = new Date(a.data().date);
+        let dateB = new Date(b.data().date);
+        return dateB - dateA;
+      });
+
       let html = ``;
       docs.forEach((event) => {
+        let date = new Date(event.data().date);
+        let formattedDate = date.toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        });
+
+        let eventTime = new Date("1970-01-01T" + event.data().time + "Z");
+        let formattedTime = eventTime.toLocaleString("en-US", {
+          hour: "numeric",
+          minute: "numeric",
+          hour12: true,
+        });
+
         html += `<div class="columns mt-2">
-          <div class="column is-6 ml-3 mr-2">
+          <div class="column is-5 ml-4">
             <img src="indeximages/a1.png" class="smaller_image" alt="Event" />
           </div>
-          <div class="column is-6 mr-2">
-            <p class="is-size-2">${event.data().name}</p>
-            <p class="is-size-3">Location: ${event.data().location}</p>
-            <p class="is-size-3">Time: ${event.data().time}</p>
-            <p class="is-size-3">Type: ${event.data().type}</p>
+          <div class="column is-7 mt-4 mr-4">
+            <p class="is-size-3">${event.data().name}</p><br />
+            <p class="is-size-4">Location: ${event.data().location}</p>
+            <p class="is-size-4">Date: ${formattedDate}</p>
+            <p class="is-size-4">Time: ${formattedTime}</p>
+            <p class="is-size-4">Type: ${event.data().type}</p>
             <br />
             <p class="is-size-5">${event.data().description}</p>
           </div>
