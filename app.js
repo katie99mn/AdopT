@@ -99,8 +99,8 @@ function show_events(isAdmin) {
 
         // Add delete button for admin users
         if (isAdmin) {
-          html += `
-            <button class="button is-danger mt-2 delete-btn" 
+          html += `<br />
+            <button class="button learn_btn mt-2" 
               onclick="deleteEvent('${event.id}')">
               Delete Event
             </button>`;
