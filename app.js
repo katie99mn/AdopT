@@ -382,21 +382,7 @@ function renderEvents(isAdmin) {
         const eventDiv = document.createElement("div");
         eventDiv.classList.add("columns", "mt-2");
 
-        eventDiv.innerHTML = `
-          <div class="column is-4 ml-4">
-            <img src="indeximages/a1.png" class="smaller_image" alt="Event" />
-          </div>
-          <div class="column is-7 mt-4 mr-4">
-            <div class="event-details">
-              <p class="is-size-3">${event.name}</p>
-              <p class="is-size-4">Location: ${event.location}</p>
-              <p class="is-size-4">Time: ${event.time}</p>
-              <p class="is-size-4">Type: ${event.type}</p>
-              <br />
-              <p class="is-size-5">${event.description}</p>
-            </div>
-          </div>
-        `;
+        show_events();
 
         // Add delete button if the user is an admin
         if (isAdmin) {
