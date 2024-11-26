@@ -51,12 +51,13 @@ document.querySelector("#event_submit")?.addEventListener("click", () => {
     });
 });
 
-function show_events() {
+function show_events(isAdmin) {
   db.collection("events")
     .get()
     .then((data) => {
       let docs = data.docs;
 
+      // Sort events by date (newest first)
       docs.sort((a, b) => {
         let dateA = new Date(a.data().date);
         let dateB = new Date(b.data().date);
@@ -64,6 +65,8 @@ function show_events() {
       });
 
       let html = ``;
+
+      // Loop through events and generate HTML
       docs.forEach((event) => {
         let date = new Date(event.data().date);
         let formattedDate = date.toLocaleDateString("en-US", {
@@ -81,7 +84,9 @@ function show_events() {
 
         html += `<div class="columns mt-2">
           <div class="column is-5 ml-4">
-            <img src="indeximages/a1.png" class="smaller_image" alt="Event" />
+            <img src="${
+              event.data().image || "indeximages/a1.png"
+            }" class="smaller_image" alt="Event" />
           </div>
           <div class="column is-7 mt-4 mr-4">
             <p class="is-size-3">${event.data().name}</p><br />
@@ -90,12 +95,27 @@ function show_events() {
             <p class="is-size-4">Time: ${formattedTime}</p>
             <p class="is-size-4">Type: ${event.data().type}</p>
             <br />
-            <p class="is-size-5">${event.data().description}</p>
-          </div>
-        </div>`;
+            <p class="is-size-5">${event.data().description}</p>`;
+
+        // Add delete button for admin users
+        if (isAdmin) {
+          html += `
+            <button class="button is-danger mt-2 delete-btn" 
+              onclick="deleteEvent('${event.id}')">
+              Delete Event
+            </button>`;
+        }
+
+        html += `</div></div>`;
       });
 
+      // Insert the generated HTML into the container
       document.querySelector("#all_events").innerHTML = html;
+    })
+    .catch((err) => {
+      console.error("Error fetching events:", err);
+      document.querySelector("#all_events").innerHTML = `
+        <p class="has-text-danger">Failed to load events. Please try again later.</p>`;
     });
 }
 show_events();
@@ -434,15 +454,15 @@ auth.onAuthStateChanged((user) => {
       .doc(user.email)
       .get()
       .then((doc) => {
-        const isAdmin = doc.data()?.admin === 1;
-        renderEvents(isAdmin); // Render events with or without delete buttons
+        const isAdmin = doc.data()?.admin === 1; // Check admin status
+        show_events(isAdmin); // Pass admin status to show_events
       })
       .catch((err) => {
         console.error("Error checking admin role:", err);
-        renderEvents(false); // Render without delete buttons in case of error
+        show_events(false); // Render events without delete buttons in case of error
       });
   } else {
-    renderEvents(false); // Render events without delete buttons for logged-out users
+    show_events(false); // Render events without delete buttons for logged-out users
   }
 });
 
