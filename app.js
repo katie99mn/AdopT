@@ -398,22 +398,6 @@ function renderEvents(isAdmin) {
           </div>
         `;
 
-        // Previous code
-        // eventDiv.innHTML = `<div class="columns mt-2">
-        //   <div class="column is-5 ml-4">
-        //     <img src="indeximages/a1.png" class="smaller_image" alt="Event" />
-        //   </div>
-        //   <div class="column is-7 mt-4 mr-4">
-        //     <p class="is-size-3">${event.data().name}</p><br />
-        //     <p class="is-size-4">Location: ${event.data().location}</p>
-        //     <p class="is-size-4">Date: ${formattedDate}</p>
-        //     <p class="is-size-4">Time: ${formattedTime}</p>
-        //     <p class="is-size-4">Type: ${event.data().type}</p>
-        //     <br />
-        //     <p class="is-size-5">${event.data().description}</p>
-        //   </div>
-        // </div>`;
-
         // Add delete button if the user is an admin
         if (isAdmin) {
           const deleteButton = document.createElement("button");
