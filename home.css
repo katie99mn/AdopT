@@ -176,3 +176,19 @@ footer .column {
   width: 350px;
   height: auto;
 }
+
+/* EVENT PAGE */
+/* learn more button */
+.checkin_btn {
+  background-color: #e1d2b8;
+  font-weight: bold;
+  color: #5c4c44;
+  font-family: "Faustina";
+  outline: none;
+}
+.checkin_btn:hover {
+  font-weight: bold;
+  color: #5c4c44;
+  box-shadow: 0px 4px 8px rgba(92, 76, 68, 0.2);
+  outline: none;
+}

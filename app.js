@@ -95,7 +95,9 @@ function show_events(isAdmin) {
             <p class="is-size-4">Time: ${formattedTime}</p>
             <p class="is-size-4">Type: ${event.data().type}</p>
             <br />
-            <p class="is-size-5">${event.data().description}</p>`;
+            <p class="is-size-5">${event.data().description}</p>
+            <br/>
+            <button class="button checkin_btn">Check In</button>`;
 
         // Add delete button for admin users
         if (isAdmin) {
