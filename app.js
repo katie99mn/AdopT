@@ -97,7 +97,9 @@ function show_events(isAdmin) {
             <br />
             <p class="is-size-5">${event.data().description}</p>
             <br/>
-            <button class="button checkin_btn">Check In</button>`;
+            <button class="button checkin_btn" data-event-id="${
+              event.id
+            }">Check In</button>`;
 
         // Add delete button for admin users
         if (isAdmin) {
@@ -113,6 +115,28 @@ function show_events(isAdmin) {
 
       // Insert the generated HTML into the container
       document.querySelector("#all_events").innerHTML = html;
+
+      // check in button functionality
+      const checkinbuttons = document.querySelectorAll(".checkin_btn");
+
+      checkinbuttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          let user = firebase.auth().currentUser;
+          if (user) {
+            let useremail = user.email;
+            let eventId = button.getAttribute("data-event-id");
+            let event = firebase.firestore().collection("events").doc(eventId);
+            event.update({
+              attendance: firebase.firestore.FieldValue.arrayUnion(useremail),
+            });
+            configure_message_bar(
+              "You are now checked in! Welcome to our event!"
+            );
+          } else {
+            configure_message_bar("Please sign in to check in!");
+          }
+        });
+      });
     })
     .catch((err) => {
       console.error("Error fetching events:", err);
@@ -161,6 +185,7 @@ function configure_message_bar(msg) {
     r_e("message-bar").innerHTML = "";
   }, 3000);
 }
+
 // sign out code
 let signoutbtn = r_e("signoutbtn");
 signoutbtn?.addEventListener("click", () => {
@@ -694,3 +719,4 @@ fileInput.addEventListener("change", () => {
     reader.readAsDataURL(file);
   }
 });
+// CHECK IN BUTTON
