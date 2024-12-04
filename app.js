@@ -87,17 +87,22 @@ function show_events(isAdmin) {
         });
 
         html += `<div class="columns mt-2">
+        <div class="column is-12">
+        <div class="box">
+        <div class="columns">
           <div class="column is-5 ml-4">
             <img src="${
               event.data().image || "indeximages/a1.png"
             }" class="smaller_image" alt="Event" />
           </div>
-          <div class="column is-7 mt-4 mr-4">
-            <p class="is-size-3">${event.data().name}</p><br />
-            <p class="is-size-4">Location: ${event.data().location}</p>
-            <p class="is-size-4">Date: ${formattedDate}</p>
-            <p class="is-size-4">Time: ${formattedTime}</p>
-            <p class="is-size-4">Type: ${event.data().type}</p>
+          <div class="column is-7 mt-4">
+            <p class="is-size-3" style="font-weight: bold">${
+              event.data().name
+            }</p><br />
+            <p class="is-size-5">Location: ${event.data().location}</p>
+            <p class="is-size-5">Date: ${formattedDate}</p>
+            <p class="is-size-5">Time: ${formattedTime}</p>
+            <p class="is-size-5">Type: ${event.data().type}</p>
             <br />
             <p class="is-size-5">${event.data().description}</p>
             <br/>
@@ -109,21 +114,21 @@ function show_events(isAdmin) {
         if (isAdmin) {
           const attendance = event.data().attendance || [];
           if (attendance.length > 0) {
-            html += `<br /><p class="is-size-4 mt-3 p-2" style="background-color:#e1d2b8; font-weight:bold">Attendance</p><p class="pl-2 pr-2 is-italic" style="background-color:#e1d2b8; font-weight:bold">Total Count: ${attendance.length}</p><p class="pl-2 pr-2 is-italic" style="background-color:#e1d2b8; font-weight:bold">Attendees:</p><ul>`;
+            html += `<br /><div style="background-color:#e1d2b8"><p class="is-size-4 mt-3 p-2" style="font-weight:bold">Attendance</p><p class="pl-4 pr-4 is-italic" style="font-weight:bold">Total Count: ${attendance.length}</p><p class="pl-4 pr-4 is-italic" style="background-color:#e1d2b8; font-weight:bold">Attendees:</p><select class="att-dropdown"><option value="default" selected>Attendee Emails</option>`;
             attendance.forEach((email) => {
-              html += `<li class="pl-5 pr-5 pb-2" style="background-color:#e1d2b8">${email}</li>`;
+              html += `<option class="pl-5 pr-5 pb-2" style="background-color:#e1d2b8">${email}</option>`;
             });
-            html += `</ul>`;
+            html += `</select>`;
           }
 
-          html += `<br />
+          html += `</div><br />
             <button class="button learn_btn" 
               onclick="deleteEvent('${event.id}')">
               Delete Event
             </button>`;
         }
 
-        html += `</div></div>`;
+        html += `</div></div></div></div></div>`;
       });
 
       // Insert the generated HTML into the container
@@ -142,6 +147,7 @@ function show_events(isAdmin) {
             event.update({
               attendance: firebase.firestore.FieldValue.arrayUnion(useremail),
             });
+
             configure_message_bar(
               "You are now checked in! Welcome to our event!"
             );

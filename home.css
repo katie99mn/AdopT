@@ -192,3 +192,11 @@ footer .column {
   box-shadow: 0px 4px 8px rgba(92, 76, 68, 0.2);
   outline: none;
 }
+.att-dropdown {
+  font-family: "Faustina";
+  margin-left: 1em;
+  margin-bottom: 1.5em;
+}
+.box {
+  border-radius: 0;
+}
