@@ -96,25 +96,29 @@ function show_events(isAdmin) {
             }" class="smaller_image" alt="Event" />
           </div>
           <div class="column is-7 mt-4">
-            <p class="is-size-3" style="font-weight: bold">${
+            <p class="is-size-3 darkbrown has-text-weight-bold">${
               event.data().name
             }</p><br />
-            <p class="is-size-5">Location: ${event.data().location}</p>
-            <p class="is-size-5">Date: ${formattedDate}</p>
-            <p class="is-size-5">Time: ${formattedTime}</p>
-            <p class="is-size-5">Type: ${event.data().type}</p>
+            <p class="is-size-5 darkbrown">Location: ${
+              event.data().location
+            }</p>
+            <p class="is-size-5 darkbrown">Date: ${formattedDate}</p>
+            <p class="is-size-5 darkbrown">Time: ${formattedTime}</p>
+            <p class="is-size-5 darkbrown">Type: ${event.data().type}</p>
             <br />
-            <p class="is-size-5">${event.data().description}</p>
+            <p class="is-size-5 darkbrown">${event.data().description}</p>
             <br/>
             <button class="button checkin_btn" data-event-id="${
               event.id
-            }">Check In</button>`;
+            }">Check In</button><div class="checkin-message-bar is-italic has-text-weight-bold pt-3" id="checkin-message-bar-${
+          event.id
+        }"></div>`;
 
         // Add delete button for admin users
         if (isAdmin) {
           const attendance = event.data().attendance || [];
           if (attendance.length > 0) {
-            html += `<br /><div style="background-color:#e1d2b8"><p class="is-size-4 mt-3 p-2" style="font-weight:bold">Attendance</p><p class="pl-4 pr-4 is-italic" style="font-weight:bold">Total Count: ${attendance.length}</p><p class="pl-4 pr-4 is-italic" style="background-color:#e1d2b8; font-weight:bold">Attendees:</p><select class="att-dropdown"><option value="default" selected>Attendee Emails</option>`;
+            html += `<br /><div style="background-color:#e1d2b8"><p class="is-size-4 mt-3 p-2 has-text-weight-bold">Attendance</p><p class="pl-4 pr-4 is-italic has-text-weight-bold">Total Count: ${attendance.length}</p><p class="pl-4 pr-4 is-italic has-text-weight-bold" style="background-color:#e1d2b8">Attendees:</p><select class="att-dropdown"><option value="default" selected>Attendee Emails</option>`;
             attendance.forEach((email) => {
               html += `<option class="pl-5 pr-5 pb-2" style="background-color:#e1d2b8">${email}</option>`;
             });
@@ -131,28 +135,34 @@ function show_events(isAdmin) {
         html += `</div></div></div></div></div>`;
       });
 
-      // Insert the generated HTML into the container
       document.querySelector("#all_events").innerHTML = html;
 
-      // check in button functionality
+      // CHECKIN BUTTON FUNCTIONALITY
       const checkinbuttons = document.querySelectorAll(".checkin_btn");
 
       checkinbuttons.forEach((button) => {
         button.addEventListener("click", () => {
           let user = firebase.auth().currentUser;
+          let eventId = button.getAttribute("data-event-id");
+
           if (user) {
             let useremail = user.email;
-            let eventId = button.getAttribute("data-event-id");
             let event = firebase.firestore().collection("events").doc(eventId);
             event.update({
               attendance: firebase.firestore.FieldValue.arrayUnion(useremail),
             });
-
-            configure_message_bar(
-              "You are now checked in! Welcome to our event!"
+            button.innerText = "Checked In";
+            button.classList.add("checked-in");
+            button.disabled = true;
+            configure_checkin_message_bar(
+              eventId,
+              "You are now checked in. Welcome to our event!"
             );
           } else {
-            configure_message_bar("Please sign in to check in!");
+            configure_checkin_message_bar(
+              eventId,
+              "Please sign in to check in!"
+            );
           }
         });
       });
@@ -203,6 +213,18 @@ function configure_message_bar(msg) {
     r_e("message-bar").classList.add("is-hidden");
     r_e("message-bar").innerHTML = "";
   }, 3000);
+}
+function configure_checkin_message_bar(eventId, msg) {
+  const msgbar = document.getElementById(`checkin-message-bar-${eventId}`);
+  msgbar.innerHTML = msg;
+
+  // Show the message bar
+  msgbar.classList.remove("is-hidden");
+
+  setTimeout(() => {
+    msgbar.classList.add("is-hidden");
+    msgbar.innerHTML = "";
+  }, 5000); // 5 seconds timeout
 }
 
 // sign out code
