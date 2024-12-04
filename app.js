@@ -25,35 +25,44 @@ add_bg?.addEventListener("click", () => {
 });
 
 // adding an event to a collection
-document.querySelector("#event_submit")?.addEventListener("click", () => {
-  let name = document.querySelector("#event_name").value;
-  let location = document.querySelector("#event_location").value;
-  let date = document.querySelector("#event_date").value;
-  let time = document.querySelector("#event_time").value;
-  let type = document.querySelector("#event_type").value;
-  let description = document.querySelector("#event_description").value;
-  let upload = document.querySelector("#image_upload").value;
+document
+  .querySelector("#event_submit")
+  ?.addEventListener("click", async (e) => {
+    e.preventDefault();
+    let name = document.querySelector("#event_name").value;
+    let location = document.querySelector("#event_location").value;
+    let date = document.querySelector("#event_date").value;
+    let time = document.querySelector("#event_time").value;
+    let type = document.querySelector("#event_type").value;
+    let description = document.querySelector("#event_description").value;
+    let imageUpload = document.querySelector("#image_upload").files[0];
 
-  let event = {
-    name: name,
-    location: location,
-    date: date,
-    time: time,
-    type: type,
-    description: description,
-    upload: upload,
-  };
+    const storageRef = firebase
+      .storage()
+      .ref(`event_images/${imageUpload.name}`);
+    storageRef
+      .put(imageUpload)
+      .then((uploadTaskSnapshot) => uploadTaskSnapshot.ref.getDownloadURL())
+      .then((imageUrl) => {
+        let event = {
+          name: name,
+          location: location,
+          date: date,
+          time: time,
+          type: type,
+          description: description,
+          image: imageUrl, //store url in db
+        };
 
-  db.collection("events")
-    .add(event)
-    .then(() => {
-      configure_message_bar("Event added successfully!");
-      add_mod.classList.remove("is-active");
-      e.preventDefault();
-    });
-  show_events(true);
-  event_form.reset();
-});
+        return db.collection("events").add(event);
+      })
+      .then(() => {
+        configure_message_bar("Event added successfully!");
+        add_mod.classList.remove("is-active");
+        event_form.reset();
+        show_events(true);
+      });
+  });
 
 function show_events(isAdmin) {
   db.collection("events")
@@ -491,19 +500,33 @@ function toggleAddEventButton(isAdmin) {
 // }
 // Firestore delete event
 function deleteEvent(eventId) {
-  // Delete the event from Firestore
-  db.collection("events")
-    .doc(eventId)
-    .delete()
-    .then(() => {
-      configure_message_bar("Event deleted successfully!");
-      show_events(true); // Refresh the event list for the admin
-    })
-    .catch((err) => {
-      console.error("Error deleting event:", err);
-      alert("Failed to delete event.");
-    });
+  let eventDoc = db.collection("events").doc(eventId);
+
+  eventDoc.get().then(function (doc) {
+    if (doc.exists) {
+      let imageUrl = doc.data().image;
+
+      if (imageUrl) {
+        let storageRef = firebase.storage().refFromURL(imageUrl);
+
+        storageRef.delete().then(function () {
+          eventDoc.delete().then(function () {
+            configure_message_bar(
+              "Event and associated image deleted successfully!"
+            );
+            show_events(true);
+          });
+        });
+      } else {
+        eventDoc.delete().then(function () {
+          configure_message_bar("Event deleted successfully!");
+          show_events(true);
+        });
+      }
+    }
+  });
 }
+
 // Show Delete button for only admins
 auth.onAuthStateChanged((user) => {
   if (user) {
