@@ -122,14 +122,10 @@ function show_events(isAdmin) {
             attendance.forEach((email) => {
               html += `<option class="pl-5 pr-5 pb-2" style="background-color:#e1d2b8">${email}</option>`;
             });
-            html += `</select>`;
+            html += `</select></div>`;
           }
 
-          html += `</div><br />
-            <button class="button learn_btn" 
-              onclick="deleteEvent('${event.id}')">
-              Delete Event
-            </button>`;
+          html += `<br /><button class="button learn_btn mt-3" onclick="deleteEvent('${event.id}')">Delete Event</button>`;
         }
 
         html += `</div></div></div></div></div>`;
