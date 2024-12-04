@@ -217,6 +217,7 @@ r_e("submit_user")?.addEventListener("click", () => {
 
   auth.createUserWithEmailAndPassword(email, pass).then((user) => {
     configure_message_bar(`Email: ${auth.currentUser.email} has signed up`);
+    signupmod.classList.remove("is-active");
 
     console.log(user.user.uid);
     db.collection("users").doc(user.user.email).set({
