@@ -103,8 +103,17 @@ function show_events(isAdmin) {
 
         // Add delete button for admin users
         if (isAdmin) {
+          const attendance = event.data().attendance || [];
+          if (attendance.length > 0) {
+            html += `<br /><p class="is-size-4 mt-3 p-2" style="background-color:#e1d2b8; font-weight:bold">Attendance</p><p class="pl-2 pr-2 is-italic" style="background-color:#e1d2b8; font-weight:bold">Total Count: ${attendance.length}</p><p class="pl-2 pr-2 is-italic" style="background-color:#e1d2b8; font-weight:bold">Attendees:</p><ul>`;
+            attendance.forEach((email) => {
+              html += `<li class="pl-5 pr-5 pb-2" style="background-color:#e1d2b8">${email}</li>`;
+            });
+            html += `</ul>`;
+          }
+
           html += `<br />
-            <button class="button learn_btn mt-2" 
+            <button class="button learn_btn" 
               onclick="deleteEvent('${event.id}')">
               Delete Event
             </button>`;
