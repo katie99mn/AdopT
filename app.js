@@ -79,7 +79,7 @@ function show_events(isAdmin) {
           year: "numeric",
         });
 
-        let eventTime = new Date("1970-01-01T" + event.data().time + "Z");
+        let eventTime = new Date("1970-01-01T" + event.data().time);
         let formattedTime = eventTime.toLocaleString("en-US", {
           hour: "numeric",
           minute: "numeric",
