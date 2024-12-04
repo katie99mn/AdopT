@@ -47,8 +47,12 @@ document.querySelector("#event_submit")?.addEventListener("click", () => {
   db.collection("events")
     .add(event)
     .then(() => {
-      alert("New event added!");
+      configure_message_bar("Event Added Successfully!");
+      add_mod.classList.remove("is-active");
+      e.preventDefault();
     });
+  show_events(true);
+  event_form.reset();
 });
 
 function show_events(isAdmin) {
@@ -423,59 +427,55 @@ function toggleAddEventButton(isAdmin) {
   }
 }
 
-function renderEvents(isAdmin) {
-  const eventsContainer = r_e("all_events");
-  eventsContainer.innerHTML = ""; // Clear previous content
+// function renderEvents(isAdmin) {
+//   const eventsContainer = r_e("all_events");
+//   eventsContainer.innerHTML = ""; // Clear previous content
 
-  db.collection("events")
-    .get()
-    .then((snapshot) => {
-      snapshot.docs.forEach((doc) => {
-        const event = doc.data();
-        const eventId = doc.id;
+//   db.collection("events")
+//     .get()
+//     .then((snapshot) => {
+//       snapshot.docs.forEach((doc) => {
+//         const event = doc.data();
+//         const eventId = doc.id;
 
-        // Create event element
-        const eventDiv = document.createElement("div");
-        eventDiv.classList.add("columns", "mt-2");
+//         // Create event element
+//         const eventDiv = document.createElement("div");
+//         eventDiv.classList.add("columns", "mt-2");
 
-        show_events();
+//         show_events();
 
-        // Add delete button if the user is an admin
-        if (isAdmin) {
-          const deleteButton = document.createElement("button");
-          deleteButton.classList.add(
-            "button",
-            "is-danger",
-            "mt-2",
-            "delete-btn"
-          );
-          deleteButton.textContent = "Delete Event";
-          deleteButton.addEventListener("click", () => deleteEvent(eventId)); // Attach delete event listener
+//         // Add delete button if the user is an admin
+//         if (isAdmin) {
+//           const deleteButton = document.createElement("button");
+//           deleteButton.classList.add(
+//             "button",
+//             "is-danger",
+//             "mt-2",
+//             "delete-btn"
+//           );
+//           deleteButton.textContent = "Delete Event";
+//           deleteButton.addEventListener("click", () => deleteEvent(eventId)); // Attach delete event listener
 
-          // Append the button inside the event details column
-          eventDiv.querySelector(".event-details").appendChild(deleteButton);
-        }
+//           // Append the button inside the event details column
+//           eventDiv.querySelector(".event-details").appendChild(deleteButton);
+//         }
 
-        eventsContainer.appendChild(eventDiv);
-      });
-    })
-    .catch((err) => {
-      console.error("Error fetching events:", err);
-    });
-}
+//         eventsContainer.appendChild(eventDiv);
+//       });
+//     })
+//     .catch((err) => {
+//       console.error("Error fetching events:", err);
+//     });
+// }
 // Firestore delete event
 function deleteEvent(eventId) {
-  // Confirm deletion
-  const confirmDelete = confirm("Are you sure you want to delete this event?");
-  if (!confirmDelete) return;
-
   // Delete the event from Firestore
   db.collection("events")
     .doc(eventId)
     .delete()
     .then(() => {
-      alert("Event deleted successfully!");
-      renderEvents(true); // Refresh the event list for the admin
+      configure_message_bar("Event deleted successfully!");
+      show_events(true); // Refresh the event list for the admin
     })
     .catch((err) => {
       console.error("Error deleting event:", err);
