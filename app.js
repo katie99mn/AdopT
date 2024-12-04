@@ -47,7 +47,7 @@ document.querySelector("#event_submit")?.addEventListener("click", () => {
   db.collection("events")
     .add(event)
     .then(() => {
-      configure_message_bar("Event Added Successfully!");
+      configure_message_bar("Event added successfully!");
       add_mod.classList.remove("is-active");
       e.preventDefault();
     });
@@ -244,7 +244,7 @@ r_e("submit_user")?.addEventListener("click", () => {
   // console.log(email, pass);
 
   auth.createUserWithEmailAndPassword(email, pass).then((user) => {
-    configure_message_bar(`Email: ${auth.currentUser.email} has signed up`);
+    configure_message_bar(`${auth.currentUser.email} has signed up!`);
     signupmod.classList.remove("is-active");
 
     console.log(user.user.uid);
@@ -267,16 +267,13 @@ r_e("submit_user_")?.addEventListener("click", () => {
       signinmod.classList.add("is-hidden");
     })
     .catch((err) => {
-      // display error message on modal
-      console.log(err.message);
-
       // show the paragraph with ID messages
       r_e("messages2").classList.remove("is-hidden");
-
       // make text color red
       r_e("messages2").classList.add("has-text-danger");
       // show the error message
-      r_e("messages2").innerHTML = err.message;
+      r_e("messages2").innerHTML =
+        "Email or password is invalid. Please try again.";
     });
 });
 
