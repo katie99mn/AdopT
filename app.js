@@ -92,103 +92,118 @@ function show_events(isAdmin) {
 
       let html = ``;
 
-      // Loop through events and generate HTML
-      docs.forEach((event) => {
-        let date = new Date(event.data().date);
-        let formattedDate = date.toLocaleDateString("en-US", {
-          month: "long",
-          day: "numeric",
-          year: "numeric",
-        });
+      // Get the current user to check attendance
+      firebase.auth().onAuthStateChanged((user) => {
+        let userEmail = user ? user.email : null;
 
-        let eventTime = new Date("1970-01-01T" + event.data().time);
-        let formattedTime = eventTime.toLocaleString("en-US", {
-          hour: "numeric",
-          minute: "numeric",
-          hour12: true,
-        });
+        docs.forEach((event) => {
+          let eventData = event.data();
+          let date = new Date(eventData.date);
+          let formattedDate = date.toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          });
 
-        html += `<div class="columns mt-2">
-        <div class="column is-12">
-        <div class="box">
-        <div class="columns">
-          <div class="column is-5 ml-4">
-            <img src="${
-              event.data().image || "indeximages/a1.png"
-            }" class="smaller_image" alt="Event" />
-          </div>
-          <div class="column is-7">
-            <p class="is-size-3 darkbrown has-text-weight-bold">${
-              event.data().name
-            }</p><br />
-            <p class="is-size-5 darkbrown">Location: ${
-              event.data().location
-            }</p>
-            <p class="is-size-5 darkbrown">Date: ${formattedDate}</p>
-            <p class="is-size-5 darkbrown">Time: ${formattedTime}</p>
-            <p class="is-size-5 darkbrown">Type: ${event.data().type}</p>
-            <br />
-            <p class="is-size-5 darkbrown">${event.data().description}</p>
-            <br/>
-            <button class="button checkin_btn" data-event-id="${
-              event.id
-            }">Check In</button><div class="checkin-message-bar is-italic has-text-weight-bold pt-3" id="checkin-message-bar-${
-          event.id
-        }"></div>`;
+          let eventTime = new Date("1970-01-01T" + eventData.time);
+          let formattedTime = eventTime.toLocaleString("en-US", {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          });
 
-        // Add delete button for admin users
-        if (isAdmin) {
-          const attendance = event.data().attendance || [];
-          if (attendance.length > 0) {
-            html += `<div style="background-color:#e1d2b8" class="mr-5"><p class="pl-4 pr-4 pb-2 pt-2 has-text-weight-bold">Total Check Ins: ${attendance.length}</p><select class="att-dropdown"><option value="default" selected>Attendee Emails</option>`;
-            attendance.forEach((email) => {
-              html += `<option class="pl-5 pr-5 pb-2" style="background-color:#e1d2b8">${email}</option>`;
-            });
-            html += `</select></div>`;
+          // Check if user is already in attendance
+          let isCheckedIn =
+            userEmail && eventData.attendance?.includes(userEmail);
+
+          html += `<div class="columns mt-2">
+            <div class="column is-12">
+            <div class="box">
+            <div class="columns">
+              <div class="column is-5 ml-4">
+                <img src="${
+                  eventData.image || "indeximages/a1.png"
+                }" class="smaller_image" alt="Event" />
+              </div>
+              <div class="column is-7">
+                <p class="is-size-3 darkbrown has-text-weight-bold">${
+                  eventData.name
+                }</p><br />
+                <p class="is-size-5 darkbrown">Location: ${
+                  eventData.location
+                }</p>
+                <p class="is-size-5 darkbrown">Date: ${formattedDate}</p>
+                <p class="is-size-5 darkbrown">Time: ${formattedTime}</p>
+                <p class="is-size-5 darkbrown">Type: ${eventData.type}</p>
+                <br />
+                <p class="is-size-5 darkbrown">${eventData.description}</p>
+                <br/>
+                <button class="button checkin_btn ${
+                  isCheckedIn ? "checked-in" : ""
+                }" data-event-id="${event.id}" ${
+            isCheckedIn ? "disabled" : ""
+          }>${isCheckedIn ? "Checked In" : "Check In"}</button>
+                <div class="checkin-message-bar is-italic has-text-weight-bold pt-3" id="checkin-message-bar-${
+                  event.id
+                }"></div>`;
+
+          // Add delete button for admin users
+          if (isAdmin) {
+            const attendance = eventData.attendance || [];
+            if (attendance.length > 0) {
+              html += `<div style="background-color:#e1d2b8" class="mr-5"><p class="pl-4 pr-4 pb-2 pt-2 has-text-weight-bold">Total Check Ins: ${attendance.length}</p><select class="att-dropdown"><option value="default" selected>Attendee Emails</option>`;
+              attendance.forEach((email) => {
+                html += `<option class="pl-5 pr-5 pb-2" style="background-color:#e1d2b8">${email}</option>`;
+              });
+              html += `</select></div>`;
+            }
+
+            html += `<button class="button learn_btn mt-3" onclick="deleteEvent('${event.id}')">Delete Event</button>`;
           }
 
-          html += `<button class="button learn_btn mt-3" onclick="deleteEvent('${event.id}')">Delete Event</button>`;
-        }
+          html += `</div></div></div></div></div>`;
+        });
 
-        html += `</div></div></div></div></div>`;
-      });
+        document.querySelector("#all_events").innerHTML = html;
 
-      document.querySelector("#all_events").innerHTML = html;
+        // CHECKIN BUTTON FUNCTIONALITY
+        const checkinbuttons = document.querySelectorAll(".checkin_btn");
 
-      // CHECKIN BUTTON FUNCTIONALITY
-      const checkinbuttons = document.querySelectorAll(".checkin_btn");
+        checkinbuttons.forEach((button) => {
+          button.addEventListener("click", () => {
+            let user = firebase.auth().currentUser;
+            let eventId = button.getAttribute("data-event-id");
 
-      checkinbuttons.forEach((button) => {
-        button.addEventListener("click", () => {
-          let user = firebase.auth().currentUser;
-          let eventId = button.getAttribute("data-event-id");
-
-          if (user) {
-            let useremail = user.email;
-            let event = firebase.firestore().collection("events").doc(eventId);
-            event.update({
-              attendance: firebase.firestore.FieldValue.arrayUnion(useremail),
-            });
-            button.innerText = "Checked In";
-            button.classList.add("checked-in");
-            button.disabled = true;
-            configure_checkin_message_bar(
-              eventId,
-              "You are now checked in. Welcome to our event!"
-            );
-          } else {
-            configure_checkin_message_bar(
-              eventId,
-              "Please sign in to check in!"
-            );
-          }
+            if (user) {
+              let useremail = user.email;
+              let event = firebase
+                .firestore()
+                .collection("events")
+                .doc(eventId);
+              event.update({
+                attendance: firebase.firestore.FieldValue.arrayUnion(useremail),
+              });
+              button.innerText = "Checked In";
+              button.classList.add("checked-in");
+              button.disabled = true;
+              configure_checkin_message_bar(
+                eventId,
+                "You are now checked in. Welcome to our event!"
+              );
+            } else {
+              configure_checkin_message_bar(
+                eventId,
+                "Please sign in to check in!"
+              );
+            }
+          });
         });
       });
     })
     .catch((err) => {
       console.error("Error fetching events:", err);
       document.querySelector("#all_events").innerHTML = `
-        <p class="has-text-danger">Failed to load events. Please try again later.</p>`;
+          <p class="has-text-danger">Failed to load events. Please try again later.</p>`;
     });
 }
 show_events();
