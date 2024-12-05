@@ -37,6 +37,19 @@ document
     let description = document.querySelector("#event_description").value;
     let imageUpload = document.querySelector("#image_upload").files[0];
 
+    if (
+      !name ||
+      !location ||
+      !date ||
+      !time ||
+      !type ||
+      !description ||
+      !imageUpload
+    ) {
+      alert("Please fill out all fields and upload an image.");
+      return;
+    }
+
     const storageRef = firebase
       .storage()
       .ref(`event_images/${imageUpload.name}`);
