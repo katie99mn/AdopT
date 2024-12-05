@@ -117,7 +117,7 @@ function show_events(isAdmin) {
               event.data().image || "indeximages/a1.png"
             }" class="smaller_image" alt="Event" />
           </div>
-          <div class="column is-7 mt-4">
+          <div class="column is-7">
             <p class="is-size-3 darkbrown has-text-weight-bold">${
               event.data().name
             }</p><br />
@@ -140,14 +140,14 @@ function show_events(isAdmin) {
         if (isAdmin) {
           const attendance = event.data().attendance || [];
           if (attendance.length > 0) {
-            html += `<br /><div style="background-color:#e1d2b8"><p class="is-size-4 mt-3 p-2 has-text-weight-bold">Attendance</p><p class="pl-4 pr-4 is-italic has-text-weight-bold">Total Count: ${attendance.length}</p><p class="pl-4 pr-4 is-italic has-text-weight-bold" style="background-color:#e1d2b8">Attendees:</p><select class="att-dropdown"><option value="default" selected>Attendee Emails</option>`;
+            html += `<div style="background-color:#e1d2b8" class="mr-5"><p class="pl-4 pr-4 pb-2 pt-2 has-text-weight-bold">Total Check Ins: ${attendance.length}</p><select class="att-dropdown"><option value="default" selected>Attendee Emails</option>`;
             attendance.forEach((email) => {
               html += `<option class="pl-5 pr-5 pb-2" style="background-color:#e1d2b8">${email}</option>`;
             });
             html += `</select></div>`;
           }
 
-          html += `<br /><button class="button learn_btn mt-3" onclick="deleteEvent('${event.id}')">Delete Event</button>`;
+          html += `<button class="button learn_btn mt-3" onclick="deleteEvent('${event.id}')">Delete Event</button>`;
         }
 
         html += `</div></div></div></div></div>`;
