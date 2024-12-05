@@ -130,7 +130,7 @@ function show_events(isAdmin) {
                 <p class="is-size-3 darkbrown has-text-weight-bold">${
                   eventData.name
                 }<span>
-               <button class="button learn_btn deletebtn is-pulled-right ${
+               <button class="button learn_btn deletebtn is-pulled-right mr-4${
                  isAdmin ? "" : "is-hidden"
                }" onclick="deleteEvent('${event.id}')">
                  X
@@ -154,18 +154,15 @@ function show_events(isAdmin) {
                   event.id
                 }"></div>`;
 
-          // Add delete button for admin users
           if (isAdmin) {
             const attendance = eventData.attendance || [];
             if (attendance.length > 0) {
-              html += `<div style="background-color:#e1d2b8" class="mr-5"><p class="pl-4 pr-4 pb-2 pt-2 has-text-weight-bold">Total Check Ins: ${attendance.length}</p><select class="att-dropdown"><option value="default" selected>Attendee Emails</option>`;
+              html += `<div style="background-color:#e1d2b8" class="mr-4"><p class="pl-4 pr-4 pb-2 pt-2 has-text-weight-bold">Total Check Ins: ${attendance.length}</p><select class="att-dropdown"><option value="default" selected>Attendee Emails</option>`;
               attendance.forEach((email) => {
                 html += `<option class="pl-5 pr-5 pb-2" style="background-color:#e1d2b8">${email}</option>`;
               });
               html += `</select></div>`;
             }
-
-            html += `<button class="button learn_btn mt-3" onclick="deleteEvent('${event.id}')">Delete Event</button>`;
           }
 
           html += `</div></div></div></div></div>`;
