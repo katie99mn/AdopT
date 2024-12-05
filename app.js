@@ -70,6 +70,7 @@ document
         return db.collection("events").add(event);
       })
       .then(() => {
+        alert("Event added successfully!");
         configure_message_bar("Event added successfully!");
         add_mod.classList.remove("is-active");
         event_form.reset();
