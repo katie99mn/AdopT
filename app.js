@@ -129,7 +129,13 @@ function show_events(isAdmin) {
               <div class="column is-7">
                 <p class="is-size-3 darkbrown has-text-weight-bold">${
                   eventData.name
-                }</p><br />
+                }<span>
+               <button class="button learn_btn deletebtn is-pulled-right ${
+                 isAdmin ? "" : "is-hidden"
+               }" onclick="deleteEvent('${event.id}')">
+                 X
+               </button>
+             </span></p><br />
                 <p class="is-size-5 darkbrown">Location: ${
                   eventData.location
                 }</p>
