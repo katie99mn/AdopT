@@ -121,7 +121,7 @@ function show_events(isAdmin) {
             <div class="column is-12">
             <div class="box">
             <div class="columns">
-              <div class="column is-5 ml-4">
+              <div class="column is-5">
                 <img src="${
                   eventData.image || "indeximages/a1.png"
                 }" class="smaller_image" alt="Event" />
