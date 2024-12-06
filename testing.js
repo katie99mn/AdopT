@@ -52,6 +52,8 @@ async function go() {
   //click on the submit button
   await page.click("#event_submit");
 
+  await new Promise((r) => setTimeout(r, 1000));
+
   // Listen for dialog (alert) and press OK
   page.on("dialog", async (dialog) => {
     await dialog.accept();
