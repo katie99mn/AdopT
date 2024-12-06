@@ -121,7 +121,7 @@ function show_events(isAdmin) {
             <div class="column is-12" style="max-width: 1300px; margin: 0 auto">
             <div class="box">
             <div class="columns">
-              <div class="column is-one-third has-text-centered">
+              <div class="column has-text-centered">
                 <img src="${
                   eventData.image || "indeximages/a1.png"
                 }" class="smaller_image" alt="Event" />
