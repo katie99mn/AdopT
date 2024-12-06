@@ -37,20 +37,25 @@ async function go() {
   await page.click("#add_btn");
 
   //provide event details
-  await page.type("#event_name", "sample event");
-  await page.type("#event_location", "sample location");
+  await page.type("#event_name", "Test Event");
+  await page.type("#event_location", "Business School");
   await page.type("#event_date", "10-24-2024");
   await page.type("#event_time", "2:45PM");
-  await page.type("#event_type", "sample type");
-  await page.type("#event_description", "sample description");
+  await page.type("#event_type", "General Meeting");
+  await page.type("#event_description", "Join us at this event!");
 
   //add image
   await page.waitForSelector("#image_upload");
   const inputUploadHandle = await page.$("#image_upload");
-  await inputUploadHandle.uploadFile("./indeximages/Circle_Logo.png");
+  await inputUploadHandle.uploadFile("./indeximages/a1.png");
 
   //click on the submit button
   await page.click("#event_submit");
+
+  // Listen for dialog (alert) and press OK
+  page.on("dialog", async (dialog) => {
+    await dialog.accept();
+  });
 }
 
 //call go

@@ -60,7 +60,7 @@ document
         let event = {
           name: name,
           location: location,
-          date: new Date(date),
+          date: date,
           time: time,
           type: type,
           description: description,
