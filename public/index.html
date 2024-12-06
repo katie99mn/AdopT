@@ -84,28 +84,6 @@
             >
           </div>
         </div>
-        <!-- <div class="navbar-item signedin" id="email-nav"></div>
-        <div class="navbar-item">
-          <a
-            class="button signedout has-text-weight-bold darkbrown"
-            id="signupbtn"
-            >Sign Up</a
-          >
-        </div>
-        <div class="navbar-item">
-          <a
-            class="button signedout has-text-weight-bold darkbrown"
-            id="signinbtn"
-            >Sign In</a
-          >
-        </div>
-        <div class="navbar-item">
-          <a
-            class="button signedin has-text-weight-bold darkbrown"
-            id="signoutbtn"
-            >Sign Out</a
-          >
-        </div> -->
       </div>
     </div>
   </div>
@@ -121,9 +99,8 @@
     <div class="modal-background" id="si-bg"></div>
     <div class="modal-content has-background-light p-4">
       <h1 class="title is-2 darkbrown">Sign In</h1>
-      <div id="si-form" class="darkbrown">
-        <!-- Email -->
-
+      <form id="si-form" class="darkbrown">
+        <!-- email and password field -->
         <p>
           Email:
           <input
@@ -133,7 +110,6 @@
             placeholder="email address"
           />
         </p>
-
         <p>
           Password:
           <input
@@ -144,13 +120,13 @@
           />
         </p>
 
-        <p id="messages2" class="is-hidden">
-          errors will show here .. make this hidden
-        </p>
-        <!-- submit -->
+        <p id="messages2" class="is-hidden">hidden field for error message</p>
+        <!-- submit btn -->
         <br />
-        <button class="button learn_btn" id="submit_user_">Submit</button>
-      </div>
+        <button type="submit" class="button learn_btn" id="submit_user_">
+          Submit
+        </button>
+      </form>
     </div>
   </div>
 
@@ -159,7 +135,8 @@
     <div class="modal-background" id="su-bg"></div>
     <div class="modal-content has-background-light p-4">
       <h1 class="title is-2 darkbrown">Sign Up</h1>
-      <div class="form darkbrown" id="signup-form">
+      <form class="form darkbrown" id="signup-form">
+        <!-- email and password field -->
         <p>
           Email:
           <input
@@ -169,7 +146,6 @@
             placeholder="Email"
           />
         </p>
-
         <p>
           Password:
           <input
@@ -182,21 +158,25 @@
         <br />
         <div class="field">
           <div class="control">
-            <button class="button learn_btn" id="submit_user">Submit</button>
+            <!-- submit btn -->
+            <button type="submit" class="button learn_btn" id="submit_user">
+              Submit
+            </button>
           </div>
           <div class="control">
             <p id="messages" class="is-hidden">
-              error messages will show here...
+              hidden field for error message
             </p>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
   <div
     id="message_bar"
     class="has-text-centered has-background-info-light is-hidden p-4"
   ></div>
+
   <!-- HOME PAGE -->
   <body>
     <div id="hometab" class="">
@@ -854,12 +834,13 @@
             >
               Add Event
             </button>
-            <!-- add event module -->
+            <!-- add event modal/form -->
             <div class="modal has-text-left" id="add-mod">
               <div class="modal-background" id="add-bg"></div>
               <div class="modal-content has-background-light p-4">
                 <h1 class="title is-2 darkbrown">Add Event</h1>
                 <form id="event-form" class="darkbrown">
+                  <!-- event info fields -->
                   <p>
                     Event Name:
                     <input
@@ -868,7 +849,6 @@
                       id="event_name"
                     />
                   </p>
-
                   <p>
                     Location:
                     <input
@@ -922,7 +902,7 @@
                   <p id="messages2" class="is-hidden">
                     errors will show here .. make this hidden
                   </p>
-                  <!-- submit -->
+                  <!-- submit btn -->
                   <br />
                   <button id="event_submit" class="button learn_btn">
                     Submit
@@ -934,12 +914,13 @@
         </div>
       </div>
     </div>
-    <!--events body-->
+    <!--events page body-->
     <div
       style="max-width: 1400px; margin: 0 auto"
       class="section event1-bg is-hidden p-3"
       id="all_events"
     ></div>
+
     <!-- CONTACT US PAGE -->
     <div id="contacttab" class="is-hidden">
       <div class="bg about-us">
@@ -949,9 +930,8 @@
           </div>
         </div>
       </div>
-
-      <!-- contact us info (2-col layout) -->
       <div class="columns contact-info">
+        <!-- COL #1 -->
         <div class="column is-half">
           <b class="darkbrown is-size-3">Get in touch with us!</b>
           <section class="darkbrown">
@@ -1017,6 +997,7 @@
               <i><b>OTHER FORMS:</b></i>
             </p>
 
+            <!-- FORM BTNS -->
             <!-- Social & Event Suggestion Form -->
             <p class="mt-2 mb-2">
               <a
@@ -1025,7 +1006,6 @@
                 >Social & Event Suggestion Form</a
               >
             </p>
-
             <!-- Gotcha Day! Form -->
             <p class="mt-2 mb-2">
               <a
@@ -1036,7 +1016,7 @@
             </p>
           </div>
         </div>
-        <!-- start of second column -->
+        <!-- COL #2 -->
         <div class="column is-half pb-5">
           <iframe
             src="https://docs.google.com/forms/d/e/1FAIpQLSd0aGj_foTSTF0P0PMlDK9lqB_hj7voFpGJb7010iYSx9E2nQ/viewform?embedded=true"
@@ -1410,6 +1390,7 @@
       </div>
     </div>
 
+    <!-- ADMIN DASHBOARD -->
     <div id="admintab" class="is-hidden">
       <!-- admin lookup -->
       <div id="auth" class="m-5">
@@ -1420,12 +1401,11 @@
           <p>User Email: <span id="user_email"></span></p>
         </div>
         <div class="columns">
-          <!-- Non-admin users -->
+          <!-- non-admin users -->
           <div class="column bg m-5">
             <h1 class="title">Non-Admin Users</h1>
             <div id="registered_users"></div>
           </div>
-
           <!-- admin users -->
           <div class="column bg m-5">
             <h1 class="title">Admin Users</h1>

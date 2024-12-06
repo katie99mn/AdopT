@@ -1,6 +1,30 @@
-// FUNCTIONS
+// GLOBAL FUNCTIONS
+// grab an element based on the ID
 function r_e(id) {
   return document.querySelector(`#${id}`);
+}
+// message bar functions
+function configure_message_bar(msg) {
+  r_e("message-bar").innerHTML = msg;
+
+  r_e("message-bar").classList.remove("is-hidden");
+
+  setTimeout(() => {
+    r_e("message-bar").classList.add("is-hidden");
+    r_e("message-bar").innerHTML = "";
+  }, 3000);
+}
+function configure_checkin_message_bar(eventId, msg) {
+  const msgbar = document.getElementById(`checkin-message-bar-${eventId}`);
+  msgbar.innerHTML = msg;
+
+  // show the message bar
+  msgbar.classList.remove("is-hidden");
+
+  setTimeout(() => {
+    msgbar.classList.add("is-hidden");
+    msgbar.innerHTML = "";
+  }, 5000);
 }
 
 // NAVBAR
@@ -8,10 +32,30 @@ function r_e(id) {
 r_e("burger").addEventListener("click", () => {
   r_e("nav-links").classList.toggle("is-active");
 });
+// NAVBAR CHANGES BASED ON USER STATUS
+function configure_nav_bar(nameuser) {
+  // check if there is a current user
+  let signedinlinks = document.querySelectorAll(".signedin");
+  let signedoutlinks = document.querySelectorAll(".signedout");
 
-// USER AUTHENTIFICATION
+  if (nameuser) {
+    signedinlinks.forEach((l) => {
+      l.classList.remove("is-hidden");
+    });
+    signedoutlinks.forEach((l) => {
+      l.classList.add("is-hidden");
+    });
+  } else {
+    signedinlinks.forEach((l) => {
+      l.classList.add("is-hidden");
+    });
+    signedoutlinks.forEach((l) => {
+      l.classList.remove("is-hidden");
+    });
+  }
+}
 
-//add event js
+// ADD EVENT FUNCTIONALITY
 let add_btn = r_e("add_btn");
 let add_mod = r_e("add-mod");
 let add_bg = r_e("add-bg");
@@ -24,7 +68,7 @@ add_bg?.addEventListener("click", () => {
   add_mod.classList.remove("is-active");
 });
 
-// adding an event to a collection
+// add the event to the collection
 document
   .querySelector("#event_submit")
   ?.addEventListener("click", async (e) => {
@@ -46,7 +90,7 @@ document
       !description ||
       !imageUpload
     ) {
-      alert("Please fill out all fields and upload an image.");
+      alert("Please fill out all the fields and upload an image.");
       return;
     }
 
@@ -57,6 +101,7 @@ document
       .put(imageUpload)
       .then((uploadTaskSnapshot) => uploadTaskSnapshot.ref.getDownloadURL())
       .then((imageUrl) => {
+        // store event info in the firebase db as a new doc
         let event = {
           name: name,
           location: location,
@@ -64,13 +109,12 @@ document
           time: time,
           type: type,
           description: description,
-          image: imageUrl, //store url in db
+          image: imageUrl,
         };
 
         return db.collection("events").add(event);
       })
       .then(() => {
-        alert("Event added successfully!");
         configure_message_bar("Event added successfully!");
         add_mod.classList.remove("is-active");
         event_form.reset();
@@ -78,13 +122,43 @@ document
       });
   });
 
+// DELETE EVENT FUNCTIONALITY
+function deleteEvent(eventId) {
+  let eventDoc = db.collection("events").doc(eventId);
+
+  eventDoc.get().then(function (doc) {
+    if (doc.exists) {
+      let imageUrl = doc.data().image;
+
+      if (imageUrl) {
+        let storageRef = firebase.storage().refFromURL(imageUrl);
+
+        storageRef.delete().then(function () {
+          eventDoc.delete().then(function () {
+            configure_message_bar(
+              "Event and associated image deleted successfully!"
+            );
+            show_events(true);
+          });
+        });
+      } else {
+        eventDoc.delete().then(function () {
+          configure_message_bar("Event deleted successfully!");
+          show_events(true);
+        });
+      }
+    }
+  });
+}
+
+// DISPLAY EVENTS
 function show_events(isAdmin) {
   db.collection("events")
     .get()
     .then((data) => {
       let docs = data.docs;
 
-      // Sort events by date (newest first)
+      // Sort events by date (newest to oldest)
       docs.sort((a, b) => {
         let dateA = new Date(a.data().date);
         let dateB = new Date(b.data().date);
@@ -93,7 +167,6 @@ function show_events(isAdmin) {
 
       let html = ``;
 
-      // Get the current user to check attendance
       firebase.auth().onAuthStateChanged((user) => {
         let userEmail = user ? user.email : null;
 
@@ -113,10 +186,11 @@ function show_events(isAdmin) {
             hour12: true,
           });
 
-          // Check if user is already in attendance
+          // Check if user has attended/checked in
           let isCheckedIn =
             userEmail && eventData.attendance?.includes(userEmail);
 
+          // Generate the dynamic event info
           html += `<div class="columns mt-2">
             <div class="column is-12" style="max-width: 1300px; margin: 0 auto">
             <div class="box">
@@ -203,13 +277,13 @@ function show_events(isAdmin) {
       });
     })
     .catch((err) => {
-      console.error("Error fetching events:", err);
       document.querySelector("#all_events").innerHTML = `
           <p class="has-text-danger">Failed to load events. Please try again later.</p>`;
     });
 }
 show_events();
 
+// SIGN UP, SIGN IN, SIGN OUT FUNCTIONALITY
 // sign in JS
 let signinbtn = r_e("signinbtn");
 let signinmod = r_e("si-mod");
@@ -239,29 +313,6 @@ signupbg?.addEventListener("click", () => {
   signupmod.classList.remove("is-active");
 });
 
-function configure_message_bar(msg) {
-  r_e("message-bar").innerHTML = msg;
-
-  r_e("message-bar").classList.remove("is-hidden");
-
-  setTimeout(() => {
-    r_e("message-bar").classList.add("is-hidden");
-    r_e("message-bar").innerHTML = "";
-  }, 3000);
-}
-function configure_checkin_message_bar(eventId, msg) {
-  const msgbar = document.getElementById(`checkin-message-bar-${eventId}`);
-  msgbar.innerHTML = msg;
-
-  // Show the message bar
-  msgbar.classList.remove("is-hidden");
-
-  setTimeout(() => {
-    msgbar.classList.add("is-hidden");
-    msgbar.innerHTML = "";
-  }, 5000); // 5 seconds timeout
-}
-
 // sign out code
 let signoutbtn = r_e("signoutbtn");
 signoutbtn?.addEventListener("click", () => {
@@ -273,17 +324,16 @@ signoutbtn?.addEventListener("click", () => {
   r_e("nav-links").classList.remove("is-active");
 });
 
-// Sign up
-r_e("submit_user")?.addEventListener("click", () => {
+// SIGN UP/SIGN IN FORMS
+// Sign up form
+r_e("signup-form")?.addEventListener("submit", (event) => {
   let email = r_e("email").value;
   let pass = r_e("pass").value;
-  // console.log(email, pass);
 
   auth.createUserWithEmailAndPassword(email, pass).then((user) => {
     configure_message_bar(`${auth.currentUser.email} has signed up!`);
     signupmod.classList.remove("is-active");
 
-    console.log(user.user.uid);
     db.collection("users").doc(user.user.email).set({
       admin: 0,
     });
@@ -291,11 +341,10 @@ r_e("submit_user")?.addEventListener("click", () => {
   r_e("nav-links").classList.remove("is-active");
 });
 
-// Sign in
-r_e("submit_user_")?.addEventListener("click", () => {
+// Sign in form
+r_e("si-form")?.addEventListener("submit", (event) => {
   let email = r_e("email2").value;
   let pass = r_e("pass2").value;
-  // console.log(email, pass);
 
   auth
     .signInWithEmailAndPassword(email, pass)
@@ -315,45 +364,9 @@ r_e("submit_user_")?.addEventListener("click", () => {
   r_e("nav-links").classList.remove("is-active");
 });
 
-function configure_nav_bar(nameuser) {
-  // check if there is a current user
-
-  let signedinlinks = document.querySelectorAll(".signedin");
-  let signedoutlinks = document.querySelectorAll(".signedout");
-
-  if (nameuser) {
-    // user exists
-
-    // show all elements with the class signedin
-
-    signedinlinks.forEach((l) => {
-      l.classList.remove("is-hidden");
-    });
-
-    // hide all elements with the class signedout
-
-    signedoutlinks.forEach((l) => {
-      l.classList.add("is-hidden");
-    });
-  } else {
-    // no current user
-
-    // hide all elements with the class signedin
-    signedinlinks.forEach((l) => {
-      l.classList.add("is-hidden");
-    });
-
-    // show all elements with the class signedout
-
-    signedoutlinks.forEach((l) => {
-      l.classList.remove("is-hidden");
-    });
-  }
-}
-
+// ADMIN DASHBOARD
 auth.onAuthStateChanged((user) => {
   if (user) {
-    console.log(user.uid);
     configure_nav_bar(auth.currentUser.email);
     r_e("email-nav").innerHTML = auth.currentUser.email;
 
@@ -377,34 +390,22 @@ auth.onAuthStateChanged((user) => {
       });
   } else {
     configure_nav_bar();
-    // don't show user information as user isn't currently authenticated
+    // don't show user information as if they aren't authenticated
     all_users(0);
     update_status(0, "", "", "");
   }
 });
 
-r_e("signoutbtn")?.addEventListener("click", () => {
-  auth.signOut().then(() => {
-    // alert("you are signed out");
-  });
-});
-
 // all non-admin users (column 3)
 function all_users(mode) {
-  // we know mode can be either 'edit', 'view', or '0'
-  // if view mode, only a list of users is shown
-  // if edit mode, you can change the user roles
-  // if 0, don't show any user details - user isn't authenticated
-
+  // view mode shows list of users, edit mode allows admin to change user roles, 0 means that user is not authenticated
   if (mode == 0) {
-    // don't show any user data
     r_e("registered_users").innerHTML = "";
     r_e("admin_users").innerHTML = "";
-    // exit the function and don't run the rest of the code
     return;
   }
 
-  // fill the 3rd column - non admin users
+  // NON-ADMIN USERS
   db.collection("users")
     .where("admin", "==", 0)
     .get()
@@ -419,7 +420,7 @@ function all_users(mode) {
       r_e("registered_users").innerHTML = html;
     });
 
-  // fill the 4th column - Admin users
+  // ADMIN USERS
   db.collection("users")
     .where("admin", "==", 1)
     .get()
@@ -427,7 +428,7 @@ function all_users(mode) {
       mydocs = data.docs;
       let html = ``;
       mydocs.forEach((d) => {
-        // we want to make sure that current user can't change their own status .. they should remain admin at all times
+        // only admins can change user status
         if (d.id != auth.currentUser.email) html += `<p>${d.id}</p>`;
         if (mode == "edit" && d.id != auth.currentUser.email)
           html += `<button id="${d.id}" onclick="make_regular_user('${d.id}')">Make Regular User</button></p>`;
@@ -442,11 +443,8 @@ auth.onAuthStateChanged((user) => {
       .doc(user.email)
       .get()
       .then((doc) => {
-        const isAdmin = doc.data()?.admin === 1; // Admin flag is 1 for admin users
-        toggleAdminNav(isAdmin); // Pass the correct admin flag to the function
-      })
-      .catch((err) => {
-        console.error("Error fetching admin data:", err);
+        const isAdmin = doc.data()?.admin === 1;
+        toggleAdminNav(isAdmin);
       });
   } else {
     // Hide admin nav if no user is logged in
@@ -454,113 +452,42 @@ auth.onAuthStateChanged((user) => {
   }
 });
 function toggleAdminNav(isAdmin) {
-  const adminNav = r_e("admin_nav"); // Get the admin navbar item
+  const adminNav = r_e("admin_nav");
+  // Show or hide ADMIN NAV button
   if (isAdmin) {
-    adminNav.classList.remove("is-hidden"); // Show the admin button
+    adminNav.classList.remove("is-hidden");
   } else {
-    adminNav.classList.add("is-hidden"); // Hide the admin button
+    adminNav.classList.add("is-hidden");
   }
 }
 
-// Event button for admins
+// Toggle event button for admins
 auth.onAuthStateChanged((user) => {
   if (user) {
-    // User is logged in, check their admin status
     db.collection("users")
       .doc(user.email)
       .get()
       .then((doc) => {
-        const isAdmin = doc.data()?.admin === 1; // Check if admin flag is set
-        toggleAddEventButton(isAdmin); // Toggle the button visibility
+        const isAdmin = doc.data()?.admin === 1;
+        toggleAddEventButton(isAdmin);
       })
       .catch((err) => {
-        console.error("Error fetching admin data:", err);
-        toggleAddEventButton(false); // Hide the button if there's an error
+        toggleAddEventButton(false);
       });
   } else {
-    // No user is logged in, hide the button
     toggleAddEventButton(false);
   }
 });
 function toggleAddEventButton(isAdmin) {
-  const addEventButton = r_e("add_btn"); // Get the Add Event button
+  const addEventButton = r_e("add_btn");
   if (isAdmin) {
-    addEventButton.classList.remove("is-hidden"); // Show the button
+    addEventButton.classList.remove("is-hidden");
   } else {
-    addEventButton.classList.add("is-hidden"); // Hide the button
+    addEventButton.classList.add("is-hidden");
   }
 }
 
-// function renderEvents(isAdmin) {
-//   const eventsContainer = r_e("all_events");
-//   eventsContainer.innerHTML = ""; // Clear previous content
-
-//   db.collection("events")
-//     .get()
-//     .then((snapshot) => {
-//       snapshot.docs.forEach((doc) => {
-//         const event = doc.data();
-//         const eventId = doc.id;
-
-//         // Create event element
-//         const eventDiv = document.createElement("div");
-//         eventDiv.classList.add("columns", "mt-2");
-
-//         show_events();
-
-//         // Add delete button if the user is an admin
-//         if (isAdmin) {
-//           const deleteButton = document.createElement("button");
-//           deleteButton.classList.add(
-//             "button",
-//             "is-danger",
-//             "mt-2",
-//             "delete-btn"
-//           );
-//           deleteButton.textContent = "Delete Event";
-//           deleteButton.addEventListener("click", () => deleteEvent(eventId)); // Attach delete event listener
-
-//           // Append the button inside the event details column
-//           eventDiv.querySelector(".event-details").appendChild(deleteButton);
-//         }
-
-//         eventsContainer.appendChild(eventDiv);
-//       });
-//     })
-//     .catch((err) => {
-//       console.error("Error fetching events:", err);
-//     });
-// }
-// Firestore delete event
-function deleteEvent(eventId) {
-  let eventDoc = db.collection("events").doc(eventId);
-
-  eventDoc.get().then(function (doc) {
-    if (doc.exists) {
-      let imageUrl = doc.data().image;
-
-      if (imageUrl) {
-        let storageRef = firebase.storage().refFromURL(imageUrl);
-
-        storageRef.delete().then(function () {
-          eventDoc.delete().then(function () {
-            configure_message_bar(
-              "Event and associated image deleted successfully!"
-            );
-            show_events(true);
-          });
-        });
-      } else {
-        eventDoc.delete().then(function () {
-          configure_message_bar("Event deleted successfully!");
-          show_events(true);
-        });
-      }
-    }
-  });
-}
-
-// Show Delete button for only admins
+// Show delete event button only for admins
 auth.onAuthStateChanged((user) => {
   if (user) {
     // Check if the user is an admin
@@ -568,18 +495,18 @@ auth.onAuthStateChanged((user) => {
       .doc(user.email)
       .get()
       .then((doc) => {
-        const isAdmin = doc.data()?.admin === 1; // Check admin status
-        show_events(isAdmin); // Pass admin status to show_events
+        const isAdmin = doc.data()?.admin === 1;
+        show_events(isAdmin);
       })
       .catch((err) => {
-        console.error("Error checking admin role:", err);
-        show_events(false); // Render events without delete buttons in case of error
+        show_events(false);
       });
   } else {
-    show_events(false); // Render events without delete buttons for logged-out users
+    show_events(false);
   }
 });
 
+// FUNCTIONS FOR ADMINS
 function make_admin(id) {
   db.collection("users")
     .doc(id)
@@ -588,7 +515,6 @@ function make_admin(id) {
     })
     .then(() => all_users("edit"));
 }
-
 function make_regular_user(id) {
   db.collection("users")
     .doc(id)
@@ -597,16 +523,15 @@ function make_regular_user(id) {
     })
     .then(() => all_users("edit"));
 }
-
 function update_status(yn, admin, uid, email) {
-  // console.log("update status");
-  // console.log(yn, uid, email)
   r_e("logged_in_user").innerHTML = yn;
   r_e("is_user_admin").innerHTML = admin;
   (r_e("current_user_id").innerHTML = uid),
     (r_e("user_email").innerHTML = email);
 }
 
+// PAGE NAVIGATION
+// home page
 r_e("home").addEventListener("click", () => {
   r_e("hometab").classList.remove("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
@@ -623,6 +548,7 @@ r_e("home").addEventListener("click", () => {
   r_e("nav-links").classList.remove("is-active");
 });
 
+// about us page
 r_e("about").addEventListener("click", () => {
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.remove("is-hidden");
@@ -639,6 +565,7 @@ r_e("about").addEventListener("click", () => {
   r_e("nav-links").classList.remove("is-active");
 });
 
+// events page
 r_e("events").addEventListener("click", () => {
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
@@ -655,6 +582,7 @@ r_e("events").addEventListener("click", () => {
   r_e("nav-links").classList.remove("is-active");
 });
 
+// contact us page
 r_e("contact").addEventListener("click", () => {
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
@@ -671,6 +599,7 @@ r_e("contact").addEventListener("click", () => {
   r_e("nav-links").classList.remove("is-active");
 });
 
+// eboard member profiles
 r_e("abbi").addEventListener("click", () => {
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
@@ -761,6 +690,7 @@ r_e("shu_lan").addEventListener("click", () => {
   r_e("about_shu_lan").classList.remove("is-hidden");
 });
 
+// admin page
 r_e("admin").addEventListener("click", () => {
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
@@ -777,6 +707,7 @@ r_e("admin").addEventListener("click", () => {
   r_e("nav-links").classList.remove("is-active");
 });
 
+// learn more button goes to about page
 r_e("learn_more").addEventListener("click", () => {
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.remove("is-hidden");
@@ -811,4 +742,3 @@ fileInput.addEventListener("change", () => {
     reader.readAsDataURL(file);
   }
 });
-// CHECK IN BUTTON
