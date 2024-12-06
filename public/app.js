@@ -118,15 +118,15 @@ function show_events(isAdmin) {
             userEmail && eventData.attendance?.includes(userEmail);
 
           html += `<div class="columns mt-2">
-            <div class="column is-12">
+            <div class="column is-12" style="max-width: 1300px; margin: 0 auto">
             <div class="box">
             <div class="columns">
-              <div class="column is-5">
+              <div class="column is-one-third has-text-centered">
                 <img src="${
                   eventData.image || "indeximages/a1.png"
                 }" class="smaller_image" alt="Event" />
               </div>
-              <div class="column is-7">
+              <div class="column is-two-thirds">
                 <p class="is-size-3 darkbrown has-text-weight-bold">${
                   eventData.name
                 }<span>

@@ -89,7 +89,7 @@ button,
 }
 /* mission photo */
 .smaller_image {
-  width: 380px;
+  max-width: 380px;
   height: auto;
 }
 /* FOOTER STYLING */
