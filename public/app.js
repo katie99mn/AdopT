@@ -124,7 +124,7 @@ function show_events(isAdmin) {
               <div class="column has-text-centered">
                 <img src="${
                   eventData.image || "indeximages/a1.png"
-                }" class="smaller_image" alt="Event" />
+                }" alt="Event" />
               </div>
               <div class="column is-two-thirds">
                 <p class="is-size-3 darkbrown has-text-weight-bold">${
@@ -270,6 +270,7 @@ signoutbtn?.addEventListener("click", () => {
   auth.signOut().then(() => {
     configure_message_bar("You are now logged out!");
   });
+  r_e("nav-links").classList.remove("is-active");
 });
 
 // Sign up
@@ -287,6 +288,7 @@ r_e("submit_user")?.addEventListener("click", () => {
       admin: 0,
     });
   });
+  r_e("nav-links").classList.remove("is-active");
 });
 
 // Sign in
@@ -310,6 +312,7 @@ r_e("submit_user_")?.addEventListener("click", () => {
       r_e("messages2").innerHTML =
         "Email or password is invalid. Please try again.";
     });
+  r_e("nav-links").classList.remove("is-active");
 });
 
 function configure_nav_bar(nameuser) {
@@ -617,6 +620,7 @@ r_e("home").addEventListener("click", () => {
   r_e("about_lacey").classList.add("is-hidden");
   r_e("about_ruby").classList.add("is-hidden");
   r_e("about_shu_lan").classList.add("is-hidden");
+  r_e("nav-links").classList.remove("is-active");
 });
 
 r_e("about").addEventListener("click", () => {
@@ -632,6 +636,7 @@ r_e("about").addEventListener("click", () => {
   r_e("about_lacey").classList.add("is-hidden");
   r_e("about_ruby").classList.add("is-hidden");
   r_e("about_shu_lan").classList.add("is-hidden");
+  r_e("nav-links").classList.remove("is-active");
 });
 
 r_e("events").addEventListener("click", () => {
@@ -647,6 +652,7 @@ r_e("events").addEventListener("click", () => {
   r_e("about_lacey").classList.add("is-hidden");
   r_e("about_ruby").classList.add("is-hidden");
   r_e("about_shu_lan").classList.add("is-hidden");
+  r_e("nav-links").classList.remove("is-active");
 });
 
 r_e("contact").addEventListener("click", () => {
@@ -662,6 +668,7 @@ r_e("contact").addEventListener("click", () => {
   r_e("about_lacey").classList.add("is-hidden");
   r_e("about_ruby").classList.add("is-hidden");
   r_e("about_shu_lan").classList.add("is-hidden");
+  r_e("nav-links").classList.remove("is-active");
 });
 
 r_e("abbi").addEventListener("click", () => {
@@ -767,6 +774,7 @@ r_e("admin").addEventListener("click", () => {
   r_e("about_lacey").classList.add("is-hidden");
   r_e("about_ruby").classList.add("is-hidden");
   r_e("about_shu_lan").classList.add("is-hidden");
+  r_e("nav-links").classList.remove("is-active");
 });
 
 r_e("learn_more").addEventListener("click", () => {
