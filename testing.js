@@ -7,18 +7,51 @@ async function go() {
     headless: false,
     slowMo: 50,
   });
+
+  //go to site to be tested
+  const page = await brower.newPage();
+  await page.goto("http://127.0.0.1:5501/home.html");
+
+  //click on the burger button
+  await page.click("#burger");
+
+  //click on the sign-in button
+  await page.click("#signinbtn");
+
+  //provide email and password to sign in
+  await page.type("#email2", "test@test.com");
+  await page.type("#pass2", "test@test.com");
+
+  //click on submit button
+  await page.click("#submit_user_");
+
+  //enforce a 1 second delay
+  await new Promise((r) => setTimeout(r, 1000));
+  //click on the event page
+  await page.click("#events");
+  await page.click("#burger");
+
+  await new Promise((r) => setTimeout(r, 1000));
+
+  //click on add event button
+  await page.click("#add_btn");
+
+  //provide event details
+  await page.type("#event_name", "sample event");
+  await page.type("#event_location", "sample location");
+  await page.type("#event_date", "10-24-2024");
+  await page.type("#event_time", "2:45PM");
+  await page.type("#event_type", "sample type");
+  await page.type("#event_description", "sample description");
+
+  //add image
+  await page.waitForSelector("#image_upload");
+  const inputUploadHandle = await page.$("#image_upload");
+  await inputUploadHandle.uploadFile("./indeximages/Circle_Logo.png");
+
+  //click on the submit button
+  await page.click("#event_submit");
 }
 
-//go to site to be tested
-const page = await brower.newPage();
-await page.goto("");
-
-//click on the sign-in button
-await page.click("#signinbtn");
-
-//provide email and password to sign in
-await page.type("#email2", "test@test.com");
-await page.type("#pass2", "test@test.com");
-
-//click on submit button
-await page.click("#submit_user_");
+//call go
+go();
