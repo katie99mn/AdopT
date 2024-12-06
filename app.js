@@ -851,6 +851,7 @@ fileInput.addEventListener("change", async () => {
     try {
       // Upload file to Firebase Storage
       const snapshot = await storageRef.put(file);
+      alert("image uploaded");
       console.log("Uploaded a blob or file!");
 
       // Get the download URL
