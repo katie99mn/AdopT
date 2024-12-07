@@ -596,6 +596,7 @@ function update_status(yn, admin, uid, email) {
 // PAGE NAVIGATION
 // home page
 r_e("home").addEventListener("click", () => {
+  document.title = "Home";
   r_e("hometab").classList.remove("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
@@ -613,6 +614,7 @@ r_e("home").addEventListener("click", () => {
 
 // about us page
 r_e("about").addEventListener("click", () => {
+  document.title = "About";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.remove("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
@@ -630,6 +632,7 @@ r_e("about").addEventListener("click", () => {
 
 // events page
 r_e("events").addEventListener("click", () => {
+  document.title = "Events";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.remove("is-hidden");
@@ -647,6 +650,7 @@ r_e("events").addEventListener("click", () => {
 
 // contact us page
 r_e("contact").addEventListener("click", () => {
+  document.title = "Contact";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
@@ -664,6 +668,7 @@ r_e("contact").addEventListener("click", () => {
 
 // eboard member profiles
 r_e("abbi").addEventListener("click", () => {
+  document.title = "Abbi Stickels";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
@@ -679,6 +684,7 @@ r_e("abbi").addEventListener("click", () => {
 });
 
 r_e("david").addEventListener("click", () => {
+  document.title = "David Izzo";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
@@ -694,6 +700,7 @@ r_e("david").addEventListener("click", () => {
 });
 
 r_e("grace").addEventListener("click", () => {
+  document.title = "Grace Drayton";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
@@ -709,6 +716,7 @@ r_e("grace").addEventListener("click", () => {
 });
 
 r_e("lacey").addEventListener("click", () => {
+  document.title = "Lacey Coyne";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
@@ -724,6 +732,7 @@ r_e("lacey").addEventListener("click", () => {
 });
 
 r_e("ruby").addEventListener("click", () => {
+  document.title = "Ruby Slavin";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
@@ -739,6 +748,7 @@ r_e("ruby").addEventListener("click", () => {
 });
 
 r_e("shu_lan").addEventListener("click", () => {
+  document.title = "Shu Lan Schaut";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
@@ -755,6 +765,7 @@ r_e("shu_lan").addEventListener("click", () => {
 
 // admin page
 r_e("admin").addEventListener("click", () => {
+  document.title = "Admin";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
@@ -772,6 +783,7 @@ r_e("admin").addEventListener("click", () => {
 
 // learn more button goes to about page
 r_e("learn_more").addEventListener("click", () => {
+  document.title = "About";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.remove("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
