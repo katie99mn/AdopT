@@ -356,7 +356,7 @@ r_e("signup-form")?.addEventListener("submit", (event) => {
   auth
     .createUserWithEmailAndPassword(email, pass)
     .then((user) => {
-      configure_message_bar(`${auth.currentUser.email} has signed up!`);
+      configure_message_bar(`You have successfully signed up. Welcome!`);
       signupmod.classList.remove("is-active");
 
       db.collection("users").doc(user.user.email).set({
