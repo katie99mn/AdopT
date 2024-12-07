@@ -594,6 +594,10 @@ function update_status(yn, admin, uid, email) {
 }
 
 // PAGE NAVIGATION
+// default document title is "Home" when page is loaded
+document.addEventListener("DOMContentLoaded", () => {
+  document.title = "Home";
+});
 // home page
 r_e("home").addEventListener("click", () => {
   document.title = "Home";
