@@ -333,11 +333,26 @@ signoutbtn?.addEventListener("click", () => {
 // SIGN UP/SIGN IN FORMS
 // Sign up form
 r_e("signup-form")?.addEventListener("submit", (event) => {
+  event.preventDefault();
+
   let email = r_e("email").value;
   let pass = r_e("pass").value;
   let firstname = r_e("first_name").value;
   let lastname = r_e("last_name").value;
-
+  // check that all fields are filled
+  if (!email || !pass || !firstname || !lastname) {
+    // show error if all the fields are not filled
+    r_e("messages3").classList.remove("is-hidden");
+    r_e("messages3").classList.add("has-text-danger");
+    r_e("messages3").innerHTML = "Please fill out all fields.";
+    // hide error message after a few seconds
+    setTimeout(() => {
+      r_e("messages3").classList.add("is-hidden");
+      r_e("messages3").innerHTML = "";
+    }, 5000);
+    return;
+  }
+  // create account
   auth
     .createUserWithEmailAndPassword(email, pass)
     .then((user) => {
@@ -352,25 +367,34 @@ r_e("signup-form")?.addEventListener("submit", (event) => {
       });
       r_e("signup-form").reset();
     })
+    // show account creation error if email or password can't be used
     .catch((error) => {
-      // show the paragraph with ID messages
       r_e("messages3").classList.remove("is-hidden");
-      // make text color red
       r_e("messages3").classList.add("has-text-danger");
-      // show the error message
-      r_e("messages3").innerHTML = error;
+      r_e("messages3").innerHTML = error.message;
+      // hide error message after a few seconds
+      setTimeout(() => {
+        r_e("messages3").classList.add("is-hidden");
+        r_e("messages3").innerHTML = "";
+      }, 5000);
     });
-  setTimeout(() => {
-    r_e("messages3").classList.add("is-hidden");
-    r_e("messages3").innerHTML = "";
-  }, 5000);
   r_e("nav-links").classList.remove("is-active");
 });
 
 // Sign in form
 r_e("si-form")?.addEventListener("submit", (event) => {
+  event.preventDefault();
+
   let email = r_e("email2").value;
   let pass = r_e("pass2").value;
+
+  // check that email and passwords are filled
+  if (!email || !pass) {
+    r_e("messages2").classList.remove("is-hidden");
+    r_e("messages2").classList.add("has-text-danger");
+    r_e("messages2").innerHTML = "Please fill out both email and password.";
+    return;
+  }
 
   auth
     .signInWithEmailAndPassword(email, pass)
@@ -380,7 +404,6 @@ r_e("si-form")?.addEventListener("submit", (event) => {
         .get()
         .then((doc) => {
           if (doc.exists) {
-            // Assuming first name is stored as 'firstName'
             const firstname = doc.data().first_name;
             configure_message_bar(`Welcome back ${firstname}!`);
           }
@@ -388,19 +411,19 @@ r_e("si-form")?.addEventListener("submit", (event) => {
       signinmod.classList.add("is-hidden");
       r_e("signup-form").reset();
     })
+    // show error message on modal if email or password is wrong
     .catch((err) => {
-      // show the paragraph with ID messages
       r_e("messages2").classList.remove("is-hidden");
-      // make text color red
       r_e("messages2").classList.add("has-text-danger");
-      // show the error message
       r_e("messages2").innerHTML =
         "Email or password is invalid. Please try again.";
     });
+  // hide error message after a few seconds
   setTimeout(() => {
-    r_e("messages3").classList.add("is-hidden");
-    r_e("messages3").innerHTML = "";
+    r_e("messages2").classList.add("is-hidden");
+    r_e("messages2").innerHTML = "";
   }, 5000);
+
   r_e("nav-links").classList.remove("is-active");
 });
 
