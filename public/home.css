@@ -196,3 +196,14 @@ footer .column {
 .box {
   border-radius: 0;
 }
+
+/* MODALS */
+#signup-form input {
+  font-family: "Faustina";
+}
+#si-form input {
+  font-family: "Faustina";
+}
+#event-form input {
+  font-family: "Faustina";
+}

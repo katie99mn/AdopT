@@ -90,8 +90,16 @@ document
       !description ||
       !imageUpload
     ) {
-      alert("Please fill out all the fields and upload an image.");
-      return;
+      r_e("eventerrmsg").classList.remove("is-hidden");
+      // make text color red
+      r_e("eventerrmsg").classList.add("has-text-danger");
+      // show the error message
+      r_e("eventerrmsg").innerHTML = "Please fill out all of the fields";
+
+      setTimeout(() => {
+        r_e("eventerrmsg").classList.add("is-hidden");
+        r_e("eventerrmsg").innerHTML = "";
+      }, 5000);
     }
 
     const storageRef = firebase
@@ -135,9 +143,7 @@ function deleteEvent(eventId) {
 
         storageRef.delete().then(function () {
           eventDoc.delete().then(function () {
-            configure_message_bar(
-              "Event and associated image deleted successfully!"
-            );
+            configure_message_bar("Event and image deleted successfully!");
             show_events(true);
           });
         });
@@ -369,7 +375,16 @@ r_e("si-form")?.addEventListener("submit", (event) => {
   auth
     .signInWithEmailAndPassword(email, pass)
     .then((user) => {
-      configure_message_bar(`Welcome back ${auth.currentUser.email}!`);
+      db.collection("users")
+        .doc(user.user.email)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            // Assuming first name is stored as 'firstName'
+            const firstname = doc.data().first_name;
+            configure_message_bar(`Welcome back ${firstname}!`);
+          }
+        });
       signinmod.classList.add("is-hidden");
       r_e("signup-form").reset();
     })
