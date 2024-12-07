@@ -329,15 +329,35 @@ signoutbtn?.addEventListener("click", () => {
 r_e("signup-form")?.addEventListener("submit", (event) => {
   let email = r_e("email").value;
   let pass = r_e("pass").value;
+  let firstname = r_e("first_name").value;
+  let lastname = r_e("last_name").value;
 
-  auth.createUserWithEmailAndPassword(email, pass).then((user) => {
-    configure_message_bar(`${auth.currentUser.email} has signed up!`);
-    signupmod.classList.remove("is-active");
+  auth
+    .createUserWithEmailAndPassword(email, pass)
+    .then((user) => {
+      configure_message_bar(`${auth.currentUser.email} has signed up!`);
+      signupmod.classList.remove("is-active");
 
-    db.collection("users").doc(user.user.email).set({
-      admin: 0,
+      db.collection("users").doc(user.user.email).set({
+        admin: 0,
+        first_name: firstname,
+        last_name: lastname,
+        email: email,
+      });
+      r_e("signup-form").reset();
+    })
+    .catch((error) => {
+      // show the paragraph with ID messages
+      r_e("messages3").classList.remove("is-hidden");
+      // make text color red
+      r_e("messages3").classList.add("has-text-danger");
+      // show the error message
+      r_e("messages3").innerHTML = error;
     });
-  });
+  setTimeout(() => {
+    r_e("messages3").classList.add("is-hidden");
+    r_e("messages3").innerHTML = "";
+  }, 5000);
   r_e("nav-links").classList.remove("is-active");
 });
 
@@ -351,6 +371,7 @@ r_e("si-form")?.addEventListener("submit", (event) => {
     .then((user) => {
       configure_message_bar(`Welcome back ${auth.currentUser.email}!`);
       signinmod.classList.add("is-hidden");
+      r_e("signup-form").reset();
     })
     .catch((err) => {
       // show the paragraph with ID messages
@@ -361,6 +382,10 @@ r_e("si-form")?.addEventListener("submit", (event) => {
       r_e("messages2").innerHTML =
         "Email or password is invalid. Please try again.";
     });
+  setTimeout(() => {
+    r_e("messages3").classList.add("is-hidden");
+    r_e("messages3").innerHTML = "";
+  }, 5000);
   r_e("nav-links").classList.remove("is-active");
 });
 
