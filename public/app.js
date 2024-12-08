@@ -824,6 +824,18 @@ fileInput.addEventListener("change", () => {
 
 // back button functionality
 
+const express = require("express");
+const app = express();
+
+app.use(express.static("public")); // Serve static files
+
+// Fallback for SPA
+app.get("*", (req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
+});
+
+app.listen(3000, () => console.log("Server running on http://localhost:3000"));
+
 // Simulated routes for your SPA
 const routes = {
   "/": "Home Page",
@@ -835,31 +847,28 @@ const routes = {
 
 // Function to handle navigation
 function navigateTo(url) {
-  // Update the browser history
-  history.pushState({}, "", url);
-
-  // Render the page content
-  renderPage(url);
+  history.pushState({}, "", url); // Update URL without reloading
+  renderPage(url); // Render the corresponding content
 }
 
-// Function to render page content based on the current route
+// Function to render content
 function renderPage(url) {
-  const content = routes[url] || "404 - Page Not Found";
-  document.getElementById("app").innerText = content;
+  const appDiv = document.getElementById("app");
+  appDiv.innerText = routes[url] || "404 - Page Not Found";
 }
 
-// Listen for back/forward navigation
+// Handle initial page load and back/forward navigation
 window.addEventListener("popstate", () => {
   renderPage(window.location.pathname);
 });
 
-// Initial page load
-renderPage(window.location.pathname);
-
-// Attach click event to navigation links
+// Handle navigation link clicks
 document.addEventListener("click", (event) => {
   if (event.target.tagName === "A" && event.target.dataset.spa) {
     event.preventDefault();
     navigateTo(event.target.getAttribute("href"));
   }
 });
+
+// Initial render
+renderPage(window.location.pathname);
