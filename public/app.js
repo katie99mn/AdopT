@@ -821,3 +821,45 @@ fileInput.addEventListener("change", () => {
     reader.readAsDataURL(file);
   }
 });
+
+// back button functionality
+
+// Simulated routes for your SPA
+const routes = {
+  "/": "Home Page",
+  "/about": "About Page",
+  "/events": "Events Page",
+  "/contact": "Contact Page",
+  "/admin": "Admin Page",
+};
+
+// Function to handle navigation
+function navigateTo(url) {
+  // Update the browser history
+  history.pushState({}, "", url);
+
+  // Render the page content
+  renderPage(url);
+}
+
+// Function to render page content based on the current route
+function renderPage(url) {
+  const content = routes[url] || "404 - Page Not Found";
+  document.getElementById("app").innerText = content;
+}
+
+// Listen for back/forward navigation
+window.addEventListener("popstate", () => {
+  renderPage(window.location.pathname);
+});
+
+// Initial page load
+renderPage(window.location.pathname);
+
+// Attach click event to navigation links
+document.addEventListener("click", (event) => {
+  if (event.target.tagName === "A" && event.target.dataset.spa) {
+    event.preventDefault();
+    navigateTo(event.target.getAttribute("href"));
+  }
+});
