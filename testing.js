@@ -3,13 +3,13 @@
 const puppeteer = require("puppeteer");
 
 async function go() {
-  const brower = await puppeteer.launch({
+  const browser = await puppeteer.launch({
     headless: false,
     slowMo: 50,
   });
 
   //go to site to be tested
-  const page = await brower.newPage();
+  const page = await browser.newPage();
   await page.goto("http://127.0.0.1:5501/home.html");
 
   //click on the burger button
