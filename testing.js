@@ -39,7 +39,7 @@ async function go() {
   //provide event details
   await page.type("#event_name", "Test Event");
   await page.type("#event_location", "Business School");
-  await page.type("#event_date", "10-24-2024");
+  await page.type("#event_date", "02-24-2025");
   await page.type("#event_time", "2:45PM");
   await page.type("#event_type", "General Meeting");
   await page.type("#event_description", "Join us at this event!");
