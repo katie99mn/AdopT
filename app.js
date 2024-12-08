@@ -104,6 +104,7 @@ function show_events(isAdmin) {
             month: "long",
             day: "numeric",
             year: "numeric",
+            timeZone: "UTC",
           });
 
           let eventTime = new Date("1970-01-01T" + eventData.time);
