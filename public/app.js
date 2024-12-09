@@ -298,11 +298,11 @@ let signinmod = r_e("si-mod");
 let signinbg = r_e("si-bg");
 let signinform = r_e("si-form");
 
-signinbtn?.addEventListener("click", () => {
+signinbtn.addEventListener("click", () => {
   signinmod.classList.add("is-active");
 });
 
-signinbg?.addEventListener("click", () => {
+signinbg.addEventListener("click", () => {
   signinmod.classList.remove("is-active");
 });
 
@@ -313,17 +313,17 @@ let signupbg = r_e("su-bg");
 let signupsubmit = r_e("su-submit");
 let signupform = r_e("su-form");
 
-signupbtn?.addEventListener("click", () => {
+signupbtn.addEventListener("click", () => {
   signupmod.classList.add("is-active");
 });
 
-signupbg?.addEventListener("click", () => {
+signupbg.addEventListener("click", () => {
   signupmod.classList.remove("is-active");
 });
 
 // sign out code
 let signoutbtn = r_e("signoutbtn");
-signoutbtn?.addEventListener("click", () => {
+signoutbtn.addEventListener("click", () => {
   // test event listener works
   // display message to let user know they signed out
   auth.signOut().then(() => {
@@ -854,7 +854,7 @@ async function onloadImage() {
       }
     }
 
-    console.log(mostRecentFile.name);
+    // console.log(mostRecentFile.name);
     // const mrfRef = folderRef.child(mostRecentFile.fullPath);
     const mrfRef = firebase.storage().ref(mostRecentFile.fullPath);
     // console.log("fullPath: " + mostRecentFile.fullPath);
