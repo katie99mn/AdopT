@@ -124,6 +124,7 @@ document
       })
       .then(() => {
         configure_message_bar("Event added successfully!");
+        alert("Form Submitted!");
         add_mod.classList.remove("is-active");
         event_form.reset();
         show_events(true);
@@ -802,6 +803,53 @@ r_e("learn_more").addEventListener("click", () => {
   r_e("about_shu_lan").classList.add("is-hidden");
 });
 
+// onload
+async function onloadImage() {
+  const imgElement = document.getElementById("upcoming_event_img_placeholder");
+  try {
+    const folderRef = firebase.storage().ref("uploads");
+    const result = await folderRef.listAll();
+
+    if (result.items.length == 0) {
+      console.log("Error: no images found in database.");
+      return;
+    }
+
+    const fileDataList = await Promise.all(
+      result.items.map(async (item) => {
+        const metadata = await item.getMetadata();
+        return {
+          name: metadata.name,
+          fullPath: metadata.fullPath,
+          updated: new Date(metadata.updated),
+        };
+      })
+    );
+
+    // finding most recently uploaded image
+    let mostRecentFile = fileDataList[0];
+    for (let i = 0; i < fileDataList.length; i++) {
+      if (fileDataList[i].updated > mostRecentFile.updated) {
+        mostRecentFile = fileDataList[i];
+      }
+    }
+
+    console.log(mostRecentFile.name);
+    // const mrfRef = folderRef.child(mostRecentFile.fullPath);
+    const mrfRef = firebase.storage().ref(mostRecentFile.fullPath);
+    // console.log("fullPath: " + mostRecentFile.fullPath);
+    const url = await mrfRef.getDownloadURL();
+    // console.log("reached");
+    // console.log("new url: " + url);
+
+    imgElement.src = url;
+  } catch (error) {
+    console.log("Error loading image.");
+  }
+}
+
+window.onload = onloadImage;
+
 // HOME PAGE IMG UPLOAD
 const fileInput = document.querySelector(
   "#upcoming_event_img input[type=file]"
@@ -810,17 +858,50 @@ const imageElement = document.getElementById("upcoming_event_img_placeholder");
 const fileNameElement = document.querySelector(
   "#upcoming_event_img .file-name"
 );
-fileInput.addEventListener("change", () => {
+
+fileInput.addEventListener("change", async () => {
   if (fileInput.files.length > 0) {
     const file = fileInput.files[0];
-    const reader = new FileReader();
+    const storageRef = firebase.storage().ref(`uploads/${file.name}`);
     fileNameElement.textContent = file.name;
-    reader.onload = (event) => {
-      imageElement.src = event.target.result;
-    };
-    reader.readAsDataURL(file);
+
+    try {
+      // Upload file to Firebase Storage
+      const snapshot = await storageRef.put(file);
+      alert("image uploaded");
+      console.log("Uploaded a blob or file!");
+
+      // Get the download URL
+      const downloadURL = await snapshot.ref.getDownloadURL();
+      console.log("File available at", downloadURL);
+
+      // Set the image source to the Firebase URL
+      imageElement.src = downloadURL;
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
   }
 });
+
+// // HOME PAGE IMG UPLOAD old
+// const fileInput = document.querySelector(
+//   "#upcoming_event_img input[type=file]"
+// );
+// const imageElement = document.getElementById("upcoming_event_img_placeholder");
+// const fileNameElement = document.querySelector(
+//   "#upcoming_event_img .file-name"
+// );
+// fileInput.addEventListener("change", () => {
+//   if (fileInput.files.length > 0) {
+//     const file = fileInput.files[0];
+//     const reader = new FileReader();
+//     fileNameElement.textContent = file.name;
+//     reader.onload = (event) => {
+//       imageElement.src = event.target.result;
+//     };
+//     reader.readAsDataURL(file);
+//   }
+// });
 
 // Hide Event upload on home page
 auth.onAuthStateChanged((user) => {
