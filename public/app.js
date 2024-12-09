@@ -332,7 +332,6 @@ signoutbtn.addEventListener("click", () => {
     signinform.reset();
   });
   r_e("nav-links").classList.remove("is-active");
-  location.reload();
 });
 
 // SIGN UP/SIGN IN FORMS
