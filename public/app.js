@@ -821,3 +821,38 @@ fileInput.addEventListener("change", () => {
     reader.readAsDataURL(file);
   }
 });
+
+// Hide Event upload on home page
+auth.onAuthStateChanged((user) => {
+  const fileUploadElement = document.getElementById("upcoming_event_img");
+
+  if (user) {
+    // Fetch user document from Firestore using the authenticated user's email
+    db.collection("users")
+      .doc(user.email)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          const admin = doc.data().admin; // Retrieve the 'admin' field
+
+          if (admin === 1) {
+            // Show the file upload section if the user is an admin
+            fileUploadElement.style.display = "block";
+          } else {
+            // Hide the file upload section if the user is not an admin
+            fileUploadElement.style.display = "none";
+          }
+        } else {
+          console.error("No such document for the user!");
+          fileUploadElement.style.display = "none"; // Hide the element by default
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching user document:", error);
+        fileUploadElement.style.display = "none"; // Hide the element in case of an error
+      });
+  } else {
+    // Hide the file upload section if no user is authenticated
+    fileUploadElement.style.display = "none";
+  }
+});
