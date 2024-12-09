@@ -598,10 +598,28 @@ function update_status(yn, admin, uid, email) {
 // PAGE NAVIGATION
 // default document title is "Home" when page is loaded
 document.addEventListener("DOMContentLoaded", () => {
+  readURL();
   document.title = "Home";
 });
+
+// add page listener
+// url function, check when url is different
+function readURL() {
+  const url = window.location.href;
+  if (url.includes("#home")) {
+    setPageToHome();
+  } else if (url.includes("#about")) {
+    setPageToAbout();
+  } else {
+    setPageToHome();
+  }
+}
+
+// Run when the URL changes due to navigation
+window.addEventListener("hashchange", readURL);
+
 // home page
-r_e("home").addEventListener("click", () => {
+function setPageToHome() {
   document.title = "Home";
   r_e("hometab").classList.remove("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
@@ -616,10 +634,10 @@ r_e("home").addEventListener("click", () => {
   r_e("about_ruby").classList.add("is-hidden");
   r_e("about_shu_lan").classList.add("is-hidden");
   r_e("nav-links").classList.remove("is-active");
-});
+}
 
 // about us page
-r_e("about").addEventListener("click", () => {
+function setPageToAbout() {
   document.title = "About";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.remove("is-hidden");
@@ -634,7 +652,7 @@ r_e("about").addEventListener("click", () => {
   r_e("about_ruby").classList.add("is-hidden");
   r_e("about_shu_lan").classList.add("is-hidden");
   r_e("nav-links").classList.remove("is-active");
-});
+}
 
 // events page
 r_e("events").addEventListener("click", () => {
