@@ -38,6 +38,14 @@ async function go() {
   //enforce a 1 second delay
   await new Promise((r) => setTimeout(r, 1000));
 
+  // Listen for dialog (alert) and press OK
+  page.on("dialog", async (dialog) => {
+    await dialog.accept();
+  });
+
+  //enforce a 1 second delay
+  await new Promise((r) => setTimeout(r, 1000));
+
   //click on the event page
   await page.click("#burger");
   await page.click("#events");
@@ -63,10 +71,10 @@ async function go() {
   //click on the submit button
   await page.click("#event_submit");
 
-  // Listen for dialog (alert) and press OK
-  page.on("dialog", async (dialog) => {
-    await dialog.accept();
-  });
+  //click on delete button
+  await page.click(
+    "#all_events > div > div > div > div > div.column.is-two-thirds > p.is-size-3.darkbrown.has-text-weight-bold > button"
+  );
 }
 
 //call go
