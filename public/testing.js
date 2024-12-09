@@ -10,7 +10,7 @@ async function go() {
 
   //go to site to be tested
   const page = await browser.newPage();
-  await page.goto("http://127.0.0.1:5501/public/index.html");
+  await page.goto("https://adopt-80f60.web.app/");
 
   //click on the burger button
   await page.click("#burger");
