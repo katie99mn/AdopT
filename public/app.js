@@ -328,6 +328,8 @@ signoutbtn.addEventListener("click", () => {
   // display message to let user know they signed out
   auth.signOut().then(() => {
     configure_message_bar("You are now logged out!");
+    signinmod.classList.remove("is-active");
+    signinform.reset();
   });
   r_e("nav-links").classList.remove("is-active");
   location.reload();
@@ -411,7 +413,7 @@ r_e("si-form").addEventListener("submit", (event) => {
             configure_message_bar(`Welcome back ${firstname}!`);
           }
         });
-      signinmod.classList.add("is-hidden");
+      signinmod.classList.remove("is-active");
       r_e("signup-form").reset();
     })
     // show error message on modal if email or password is wrong
@@ -855,7 +857,7 @@ async function onloadImage() {
       }
     }
 
-    console.log(mostRecentFile.name);
+    // console.log(mostRecentFile.name);
     // const mrfRef = folderRef.child(mostRecentFile.fullPath);
     const mrfRef = firebase.storage().ref(mostRecentFile.fullPath);
     // console.log("fullPath: " + mostRecentFile.fullPath);
