@@ -641,6 +641,7 @@ window.addEventListener("hashchange", readURL);
 // home page
 function setPageToHome() {
   document.title = "Home";
+  window.scrollTo(0, 0);
   r_e("hometab").classList.remove("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
@@ -659,6 +660,7 @@ function setPageToHome() {
 // about us page
 function setPageToAbout() {
   document.title = "About";
+  window.scrollTo(0, 0);
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.remove("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
@@ -677,6 +679,7 @@ function setPageToAbout() {
 // events page
 function setPageToEvents() {
   document.title = "Events";
+  window.scrollTo(0, 0);
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.remove("is-hidden");
@@ -695,6 +698,7 @@ function setPageToEvents() {
 // contact us page
 function setPageToContact() {
   document.title = "Contact";
+  window.scrollTo(0, 0);
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
@@ -713,6 +717,7 @@ function setPageToContact() {
 // eboard member profiles
 function setPageToAbbi() {
   document.title = "Abbi Stickels";
+  window.scrollTo(0, 0);
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
@@ -729,6 +734,7 @@ function setPageToAbbi() {
 
 function setPageToDavid() {
   document.title = "David Izzo";
+  window.scrollTo(0, 0);
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
@@ -745,6 +751,7 @@ function setPageToDavid() {
 
 function setPageToGrace() {
   document.title = "Grace Drayton";
+  window.scrollTo(0, 0);
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
@@ -761,6 +768,7 @@ function setPageToGrace() {
 
 function setPageToLacey() {
   document.title = "Lacey Coyne";
+  window.scrollTo(0, 0);
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
@@ -777,6 +785,7 @@ function setPageToLacey() {
 
 function setPageToRuby() {
   document.title = "Ruby Slavin";
+  window.scrollTo(0, 0);
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
@@ -793,6 +802,7 @@ function setPageToRuby() {
 
 function setPageToShuLan() {
   document.title = "Shu Lan Schaut";
+  window.scrollTo(0, 0);
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
@@ -810,6 +820,7 @@ function setPageToShuLan() {
 // admin page
 function setPageToAdmin() {
   document.title = "Admin";
+  window.scrollTo(0, 0);
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
   r_e("eventstab").classList.add("is-hidden");
