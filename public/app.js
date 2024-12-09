@@ -298,11 +298,11 @@ let signinmod = r_e("si-mod");
 let signinbg = r_e("si-bg");
 let signinform = r_e("si-form");
 
-signinbtn?.addEventListener("click", () => {
+signinbtn.addEventListener("click", () => {
   signinmod.classList.add("is-active");
 });
 
-signinbg?.addEventListener("click", () => {
+signinbg.addEventListener("click", () => {
   signinmod.classList.remove("is-active");
 });
 
@@ -313,28 +313,29 @@ let signupbg = r_e("su-bg");
 let signupsubmit = r_e("su-submit");
 let signupform = r_e("su-form");
 
-signupbtn?.addEventListener("click", () => {
+signupbtn.addEventListener("click", () => {
   signupmod.classList.add("is-active");
 });
 
-signupbg?.addEventListener("click", () => {
+signupbg.addEventListener("click", () => {
   signupmod.classList.remove("is-active");
 });
 
 // sign out code
 let signoutbtn = r_e("signoutbtn");
-signoutbtn?.addEventListener("click", () => {
+signoutbtn.addEventListener("click", () => {
   // test event listener works
   // display message to let user know they signed out
   auth.signOut().then(() => {
     configure_message_bar("You are now logged out!");
   });
   r_e("nav-links").classList.remove("is-active");
+  location.reload();
 });
 
 // SIGN UP/SIGN IN FORMS
 // Sign up form
-r_e("signup-form")?.addEventListener("submit", (event) => {
+r_e("signup-form").addEventListener("submit", (event) => {
   event.preventDefault();
 
   let email = r_e("email").value;
@@ -384,7 +385,7 @@ r_e("signup-form")?.addEventListener("submit", (event) => {
 });
 
 // Sign in form
-r_e("si-form")?.addEventListener("submit", (event) => {
+r_e("si-form").addEventListener("submit", (event) => {
   event.preventDefault();
 
   let email = r_e("email2").value;
