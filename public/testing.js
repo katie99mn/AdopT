@@ -27,6 +27,12 @@ async function go() {
 
   //enforce a 1 second delay
   await new Promise((r) => setTimeout(r, 1000));
+
+  //upload new upcoming event
+  await page.waitForSelector("#upcoming_event_img > label > input");
+  const inputUploadHandle1 = await page.$("#image_upload");
+  await inputUploadHandle1.uploadFile("./indeximages/a1.png");
+
   //click on the event page
   await page.click("#events");
   await page.click("#burger");
