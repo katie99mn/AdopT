@@ -70,11 +70,6 @@ async function go() {
 
   //click on the submit button
   await page.click("#event_submit");
-
-  //click on delete button
-  await page.click(
-    "#all_events > div > div > div > div > div.column.is-two-thirds > p.is-size-3.darkbrown.has-text-weight-bold > button"
-  );
 }
 
 //call go
