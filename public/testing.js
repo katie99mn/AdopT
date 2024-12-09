@@ -25,8 +25,8 @@ async function go() {
   //click on submit button
   await page.click("#submit_user_");
 
-  //enforce a 1 second delay
-  await new Promise((r) => setTimeout(r, 1000));
+  //enforce a delay
+  await new Promise((r) => setTimeout(r, 5000));
 
   //upload new upcoming event
   await page.waitForSelector("#upcoming_event_img > label > input");
@@ -35,22 +35,19 @@ async function go() {
   );
   await inputUploadHandle1.uploadFile("./indeximages/a1.png");
 
-  //enforce a 1 second delay
-  await new Promise((r) => setTimeout(r, 1000));
-
   // Listen for dialog (alert) and press OK
   page.on("dialog", async (dialog) => {
     await dialog.accept();
   });
 
-  //enforce a 1 second delay
-  await new Promise((r) => setTimeout(r, 1000));
+  //enforce a delay
+  await new Promise((r) => setTimeout(r, 3000));
 
   //click on the event page
   await page.click("#burger");
   await page.click("#events");
 
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
 
   //click on add event button
   await page.click("#add_btn");
@@ -70,6 +67,14 @@ async function go() {
 
   //click on the submit button
   await page.click("#event_submit");
+
+  await new Promise((r) => setTimeout(r, 3000));
+
+  //delete test event
+  await page.waitForSelector("#all_events > div");
+  await page.click(
+    "#all_events > div:nth-child(1) > div > div > div > div.column.is-two-thirds > p.is-size-3.darkbrown.has-text-weight-bold > button"
+  );
 }
 
 //call go
