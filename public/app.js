@@ -614,6 +614,13 @@ function readURL() {
     setPageToHome();
   }
 }
+r_e("home").addEventListener("click", () => {
+  setPageToHome();
+});
+
+r_e("about").addEventListener("click", () => {
+  setPageToAbout();
+});
 
 // Run when the URL changes due to navigation
 window.addEventListener("hashchange", readURL);
