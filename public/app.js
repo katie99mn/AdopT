@@ -316,7 +316,6 @@ let signupform = r_e("su-form");
 signupbtn.addEventListener("click", () => {
   signupmod.classList.add("is-active");
 });
-
 signupbg.addEventListener("click", () => {
   signupmod.classList.remove("is-active");
 });
@@ -328,6 +327,8 @@ signoutbtn.addEventListener("click", () => {
   // display message to let user know they signed out
   auth.signOut().then(() => {
     configure_message_bar("You are now logged out!");
+    signinmod.classList.remove("is-active");
+    signinform.reset();
   });
   r_e("nav-links").classList.remove("is-active");
 });
@@ -410,7 +411,7 @@ r_e("si-form")?.addEventListener("submit", (event) => {
             configure_message_bar(`Welcome back ${firstname}!`);
           }
         });
-      signinmod.classList.add("is-hidden");
+      signinmod.classList.remove("is-active");
       r_e("signup-form").reset();
     })
     // show error message on modal if email or password is wrong
