@@ -610,17 +610,28 @@ function readURL() {
     setPageToHome();
   } else if (url.includes("#about")) {
     setPageToAbout();
+  } else if (url.includes("#events")) {
+    setPageToEvents();
+  } else if (url.includes("#contact")) {
+    setPageToContact();
+  } else if (url.includes("admin_nav")) {
+    setPageToAdmin();
+  } else if (url.includes("#grace")) {
+    setPageToGrace();
+  } else if (url.includes("#ruby")) {
+    setPageToRuby();
+  } else if (url.includes("#lacey")) {
+    setPageToLacey();
+  } else if (url.includes("#shu_lan")) {
+    setPageToShuLan();
+  } else if (url.includes("#david")) {
+    setPageToDavid();
+  } else if (url.includes("#abbi")) {
+    setPageToAbbi();
   } else {
     setPageToHome();
   }
 }
-r_e("home").addEventListener("click", () => {
-  setPageToHome();
-});
-
-r_e("about").addEventListener("click", () => {
-  setPageToAbout();
-});
 
 // Run when the URL changes due to navigation
 window.addEventListener("hashchange", readURL);
@@ -662,7 +673,7 @@ function setPageToAbout() {
 }
 
 // events page
-r_e("events").addEventListener("click", () => {
+function setPageToEvents() {
   document.title = "Events";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
@@ -677,10 +688,10 @@ r_e("events").addEventListener("click", () => {
   r_e("about_ruby").classList.add("is-hidden");
   r_e("about_shu_lan").classList.add("is-hidden");
   r_e("nav-links").classList.remove("is-active");
-});
+}
 
 // contact us page
-r_e("contact").addEventListener("click", () => {
+function setPageToContact() {
   document.title = "Contact";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
@@ -695,10 +706,10 @@ r_e("contact").addEventListener("click", () => {
   r_e("about_ruby").classList.add("is-hidden");
   r_e("about_shu_lan").classList.add("is-hidden");
   r_e("nav-links").classList.remove("is-active");
-});
+}
 
 // eboard member profiles
-r_e("abbi").addEventListener("click", () => {
+function setPageToAbbi() {
   document.title = "Abbi Stickels";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
@@ -712,9 +723,9 @@ r_e("abbi").addEventListener("click", () => {
   r_e("about_lacey").classList.add("is-hidden");
   r_e("about_ruby").classList.add("is-hidden");
   r_e("about_shu_lan").classList.add("is-hidden");
-});
+}
 
-r_e("david").addEventListener("click", () => {
+function setPageToDavid() {
   document.title = "David Izzo";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
@@ -728,9 +739,9 @@ r_e("david").addEventListener("click", () => {
   r_e("about_lacey").classList.add("is-hidden");
   r_e("about_ruby").classList.add("is-hidden");
   r_e("about_shu_lan").classList.add("is-hidden");
-});
+}
 
-r_e("grace").addEventListener("click", () => {
+function setPageToGrace() {
   document.title = "Grace Drayton";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
@@ -744,9 +755,9 @@ r_e("grace").addEventListener("click", () => {
   r_e("about_lacey").classList.add("is-hidden");
   r_e("about_ruby").classList.add("is-hidden");
   r_e("about_shu_lan").classList.add("is-hidden");
-});
+}
 
-r_e("lacey").addEventListener("click", () => {
+function setPageToLacey() {
   document.title = "Lacey Coyne";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
@@ -760,9 +771,9 @@ r_e("lacey").addEventListener("click", () => {
   r_e("about_lacey").classList.remove("is-hidden");
   r_e("about_ruby").classList.add("is-hidden");
   r_e("about_shu_lan").classList.add("is-hidden");
-});
+}
 
-r_e("ruby").addEventListener("click", () => {
+function setPageToRuby() {
   document.title = "Ruby Slavin";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
@@ -776,9 +787,9 @@ r_e("ruby").addEventListener("click", () => {
   r_e("about_lacey").classList.add("is-hidden");
   r_e("about_ruby").classList.remove("is-hidden");
   r_e("about_shu_lan").classList.add("is-hidden");
-});
+}
 
-r_e("shu_lan").addEventListener("click", () => {
+function setPageToShuLan() {
   document.title = "Shu Lan Schaut";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
@@ -792,10 +803,10 @@ r_e("shu_lan").addEventListener("click", () => {
   r_e("about_lacey").classList.add("is-hidden");
   r_e("about_ruby").classList.add("is-hidden");
   r_e("about_shu_lan").classList.remove("is-hidden");
-});
+}
 
 // admin page
-r_e("admin").addEventListener("click", () => {
+function setPageToAdmin() {
   document.title = "Admin";
   r_e("hometab").classList.add("is-hidden");
   r_e("abouttab").classList.add("is-hidden");
@@ -810,24 +821,7 @@ r_e("admin").addEventListener("click", () => {
   r_e("about_ruby").classList.add("is-hidden");
   r_e("about_shu_lan").classList.add("is-hidden");
   r_e("nav-links").classList.remove("is-active");
-});
-
-// learn more button goes to about page
-r_e("learn_more").addEventListener("click", () => {
-  document.title = "About";
-  r_e("hometab").classList.add("is-hidden");
-  r_e("abouttab").classList.remove("is-hidden");
-  r_e("eventstab").classList.add("is-hidden");
-  r_e("all_events").classList.add("is-hidden");
-  r_e("contacttab").classList.add("is-hidden");
-  r_e("admintab").classList.add("is-hidden");
-  r_e("about_abbi").classList.add("is-hidden");
-  r_e("about_david").classList.add("is-hidden");
-  r_e("about_grace").classList.add("is-hidden");
-  r_e("about_lacey").classList.add("is-hidden");
-  r_e("about_ruby").classList.add("is-hidden");
-  r_e("about_shu_lan").classList.add("is-hidden");
-});
+}
 
 // onload
 async function onloadImage() {
