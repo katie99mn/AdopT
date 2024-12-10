@@ -323,14 +323,18 @@ signupbg.addEventListener("click", () => {
 // sign out code
 let signoutbtn = r_e("signoutbtn");
 signoutbtn.addEventListener("click", () => {
-  // test event listener works
-  // display message to let user know they signed out
   auth.signOut().then(() => {
     configure_message_bar("You are now logged out!");
     signinmod.classList.remove("is-active");
     signinform.reset();
+    r_e("nav-links").classList.remove("is-active");
+
+    if (window.location.hash !== "#home") {
+      window.location.hash = "#home";
+    }
+    // go back to home page when signed out
+    setPageToHome();
   });
-  r_e("nav-links").classList.remove("is-active");
 });
 
 // SIGN UP/SIGN IN FORMS
@@ -634,7 +638,7 @@ function readURL() {
   }
 }
 
-// Run when the URL changes due to navigation
+// run when the URL changes due to navigation
 window.addEventListener("hashchange", readURL);
 
 // home page
