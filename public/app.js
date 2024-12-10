@@ -906,26 +906,6 @@ fileInput.addEventListener("change", async () => {
   }
 });
 
-// // HOME PAGE IMG UPLOAD old
-// const fileInput = document.querySelector(
-//   "#upcoming_event_img input[type=file]"
-// );
-// const imageElement = document.getElementById("upcoming_event_img_placeholder");
-// const fileNameElement = document.querySelector(
-//   "#upcoming_event_img .file-name"
-// );
-// fileInput.addEventListener("change", () => {
-//   if (fileInput.files.length > 0) {
-//     const file = fileInput.files[0];
-//     const reader = new FileReader();
-//     fileNameElement.textContent = file.name;
-//     reader.onload = (event) => {
-//       imageElement.src = event.target.result;
-//     };
-//     reader.readAsDataURL(file);
-//   }
-// });
-
 // Hide Event upload on home page
 auth.onAuthStateChanged((user) => {
   const fileUploadElement = document.getElementById("upcoming_event_img");
