@@ -124,7 +124,6 @@ document
       })
       .then(() => {
         configure_message_bar("Event added successfully!");
-        alert("Form Submitted!");
         add_mod.classList.remove("is-active");
         event_form.reset();
         show_events(true);
@@ -844,7 +843,6 @@ async function onloadImage() {
     const result = await folderRef.listAll();
 
     if (result.items.length == 0) {
-      console.log("Error: no images found in database.");
       return;
     }
 
@@ -866,19 +864,12 @@ async function onloadImage() {
         mostRecentFile = fileDataList[i];
       }
     }
-
-    // console.log(mostRecentFile.name);
     // const mrfRef = folderRef.child(mostRecentFile.fullPath);
     const mrfRef = firebase.storage().ref(mostRecentFile.fullPath);
-    // console.log("fullPath: " + mostRecentFile.fullPath);
     const url = await mrfRef.getDownloadURL();
-    // console.log("reached");
-    // console.log("new url: " + url);
 
     imgElement.src = url;
-  } catch (error) {
-    console.log("Error loading image.");
-  }
+  } catch (error) {}
 }
 
 window.onload = onloadImage;
@@ -901,18 +892,13 @@ fileInput.addEventListener("change", async () => {
     try {
       // Upload file to Firebase Storage
       const snapshot = await storageRef.put(file);
-      alert("image uploaded");
-      console.log("Uploaded a blob or file!");
 
       // Get the download URL
       const downloadURL = await snapshot.ref.getDownloadURL();
-      console.log("File available at", downloadURL);
 
       // Set the image source to the Firebase URL
       imageElement.src = downloadURL;
-    } catch (error) {
-      console.error("Error uploading file:", error);
-    }
+    } catch (error) {}
   }
 });
 
@@ -957,12 +943,10 @@ auth.onAuthStateChanged((user) => {
             fileUploadElement.style.display = "none";
           }
         } else {
-          console.error("No such document for the user!");
           fileUploadElement.style.display = "none"; // Hide the element by default
         }
       })
       .catch((error) => {
-        console.error("Error fetching user document:", error);
         fileUploadElement.style.display = "none"; // Hide the element in case of an error
       });
   } else {
